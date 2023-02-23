@@ -1,6 +1,4 @@
-import numpy as np
-import cv2
-import math
+
 
 """
 The `display_lines` function takes a video frame, an array of line segments, and optional line color and line width as input, and returns a new video frame with the detected lines displayed.
@@ -26,6 +24,10 @@ line_width (int): The width of the heading line to be drawn. Default is 5.
 Returns:
 frame (cv2.VideoCapture(0).read()): The input video frame with the heading line displayed.
 """
+
+import numpy as np
+import cv2
+import math
 
 def display_lines(frame, lines, line_color=(0, 255, 0), line_width=6):
     
