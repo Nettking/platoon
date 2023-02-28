@@ -36,6 +36,26 @@ video = cv2.VideoCapture(0)
 video.set(cv2.CAP_PROP_FRAME_WIDTH,320)
 video.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
 
+# Create a platoon of 6 vehicles
+platoon = Platoon(6)
+
+# Set the speed and distance of each vehicle
+platoon.set_speed(0, 60)
+platoon.set_distance(0, 0)
+platoon.set_distance(1, 10)
+platoon.set_distance(2, 20)
+platoon.set_distance(3, 30)
+platoon.set_distance(4, 40)
+platoon.set_distance(5, 50)
+
+# Find the leader of the platoon
+leader_index = platoon.get_leader()
+leader = platoon.vehicles[leader_index]
+
+# Print the index and distance of the leader
+print("Leader index:", leader_index)
+print("Leader distance:", leader.distance)
+
 
 # Loop through video frames
 while True:
