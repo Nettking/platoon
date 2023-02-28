@@ -1,9 +1,5 @@
-# import the GoPiGo3 drivers
 import time
-from platooning import *
-
-
-
+from platooning import initialize_distance_sensor
 
 def get_distance(my_distance_sensor):
     try:
@@ -12,8 +8,6 @@ def get_distance(my_distance_sensor):
     except:
         print("Distance sensor reading error")
         return None
-    
-
 
 if __name__ == '__main__':
 
