@@ -40,7 +40,7 @@ video.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
 # Loop through video frames
 while True:
     # Call the lane_keeping function
-    lane_keeping(gpg, video)
+    keeping_lane(gpg, video)
 
     # Exit the loop if the ESC key is pressed
     key = cv2.waitKey(1)
