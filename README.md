@@ -13,6 +13,9 @@ To get started with the project, you'll need to clone the repository and install
 git clone https://github.com/Nettking/platoon.git
 ```
 ```sh
+sudo apt update && sudo apt install -y cmake g++ wget unzip
+```
+```sh
 pip install -r requirements.txt
 ```
 You can then run the run.py script to retrieve the historical data and train the machine learning model:
