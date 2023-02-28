@@ -1,6 +1,7 @@
-from lane_keeping import *
+import cv2
+from lane_keeping import detect_edges, region_of_interest, detect_line_segments, average_slope_intercept, display_lines, get_steering_angle, compare_to_last_value, calculate_wheel_speeds, display_heading_line
 
-def lane_keeping(gpg, video):
+def keeping_lane(gpg, video):
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
@@ -44,4 +45,4 @@ def lane_keeping(gpg, video):
     
     except:
         # Stop the robot if an error occurs
-                gpg.set_speed(0)
+        gpg.set_speed(0)
