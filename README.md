@@ -10,7 +10,7 @@ This research demonstrates the use of computer vision and machine learning in re
 ## Getting started
 To get started with the project, you'll need to clone the repository and install the required packages:<br />
 ```sh
-git clone https://github.com/Nettking/python_ml.git
+git clone https://github.com/Nettking/platoon.git
 ```
 ```sh
 pip install -r requirements.txt
