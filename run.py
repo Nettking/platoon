@@ -61,14 +61,10 @@ print("Leader distance:", leader.distance)
 
 # Loop through video frames
 while True:
-    try:
-        try:
-            # Read a video frame from the camera
-            ret,frame = video.read()
-        except:
-            print('Unable to read videoframe')
-            break
-
+        # Read a video frame from the camera
+        ret,frame = video.read()
+        print('Unable to read videoframe')
+        
         # Detect edges in the video frame
         edges = detect_edges(frame)
         
@@ -103,11 +99,7 @@ while True:
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed, rightSpeed))
         
-    except:
-        # Stop the robot if an error occurs
-        gpg.set_speed(0)
 
-    
 # Stop the robot when the loop is ended
 gpg.set_speed(0)
 
