@@ -33,7 +33,7 @@ def average_slope_intercept(frame, line_segments):
     right_fit = []
 
     # Define the region of interest for the left and right lane lines
-    boundary = 1/2
+    boundary = 1/3
     left_region_boundary = width * (1 - boundary)
     right_region_boundary = width * boundary
 
