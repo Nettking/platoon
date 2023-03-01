@@ -62,9 +62,13 @@ print("Leader distance:", leader.distance)
 # Loop through video frames
 while True:
     try:
-        # Read a video frame from the camera
-        ret,frame = video.read()
-        
+        try:
+            # Read a video frame from the camera
+            ret,frame = video.read()
+        except:
+            break
+            print('Unable to read videoframe')
+
         # Detect edges in the video frame
         edges = detect_edges(frame)
         
