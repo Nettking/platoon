@@ -101,8 +101,10 @@ while True:
         
     
         distance_in_mm = str(my_distance_sensor.read_mm())
-        print('Distance: ' + distance_in_mm)
-        print('no distance')
+        try:
+            print('Distance: ' + distance_in_mm)
+        except:
+            print('no distance')
 
         key = cv2.waitKey(1)
         if key == 27:
