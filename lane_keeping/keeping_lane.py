@@ -39,9 +39,9 @@ def keeping_lane(gpg, video):
         # Output the validated steering angle and wheel speeds to the console
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed, rightSpeed))
+        return heading_image
         
-        # Show the video frame with the heading line
-        cv2.imshow('Heading line', heading_image)
+
     
     except:
         # Stop the robot if an error occurs
