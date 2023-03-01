@@ -26,6 +26,7 @@ from easygopigo3 import EasyGoPiGo3
 
 
 from lane_keeping import *
+from platooning import *
 
 # Initialize GoPiGo3 robot and set speed
 gpg = EasyGoPiGo3()
