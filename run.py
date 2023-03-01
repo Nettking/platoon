@@ -20,6 +20,7 @@ The script requires the installation of the OpenCV and EasyGoPiGo3 libraries.
 
 """
 
+# Beans
 import cv2
 import time
 from easygopigo3 import EasyGoPiGo3
