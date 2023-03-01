@@ -112,7 +112,6 @@ while True:
             break
     except:
         gpg.set_speed(0)
-        break
     
 # Stop the robot when the loop is ended
 gpg.set_speed(0)
