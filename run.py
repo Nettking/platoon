@@ -75,6 +75,9 @@ while True:
         
         # Select region of interest in the video frame
         roi = region_of_interest(edges)
+
+        # Display edges detected in cropped video frame in new window
+        cv2.imshow("Edges in roi", roi)
         
         # Detect line segments in the selected region of interest
         line_segments = detect_line_segments(roi)
@@ -99,6 +102,9 @@ while True:
         
         # Display the heading line on the video frame
         heading_image = display_heading_line(lane_lines_image, steering_angle)
+
+        # Display final video with heading line in new window
+        cv2.imshow("Heading line", heading_image)
         
         # Output the validated steering angle and wheel speeds to the console
         print('Steering angle:' + str(validated_steering_angle))
