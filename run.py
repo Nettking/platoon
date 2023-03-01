@@ -64,7 +64,10 @@ while True:
     # Call the lane_keeping function
     heading_image = keeping_lane(gpg, video)
     # Show the video frame with the heading line
-    cv2.imshow('Heading line', heading_image)
+    try:
+        cv2.imshow('Heading line', heading_image)
+    except:
+        pass
     # Exit the loop if the ESC key is pressed
     key = cv2.waitKey(1)
     if key == 27:
