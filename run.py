@@ -33,7 +33,7 @@ gpg = EasyGoPiGo3()
 gpg.set_speed(100)
 
 # Initialize video capture and set resolution
-video = cv2.VideoCapture(-1)
+video = cv2.VideoCapture(0)
 video.set(cv2.CAP_PROP_FRAME_WIDTH,320)
 video.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
 '''
