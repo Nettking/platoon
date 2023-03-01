@@ -66,8 +66,8 @@ while True:
             # Read a video frame from the camera
             ret,frame = video.read()
         except:
-            break
             print('Unable to read videoframe')
+            break
 
         # Detect edges in the video frame
         edges = detect_edges(frame)
