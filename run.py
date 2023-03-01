@@ -56,7 +56,7 @@ leader = platoon.vehicles[leader_index]
 print("Leader index:", leader_index)
 print("Leader distance:", leader.distance)
 '''
-
+my_distance_sensor = gpg.init_distance_sensor()
 
 
 # Loop through video frames
@@ -101,20 +101,18 @@ while True:
         print('Wheel speeds: ' + str(leftSpeed, rightSpeed))
         
 
-        gpg = easy.EasyGoPiGo3()
-        
         '''
         Create an instance of the Distance Sensor class.
         I2C1 and I2C2 are just labels used for identifyng the port on the GoPiGo3 board.
         But technically, I2C1 and I2C2 are the same thing, so we don't have to pass any port to the constructor.
         '''
-        my_distance_sensor = gpg.init_distance_sensor()
+        
 
-        try:
-            distance_in_mm = str(my_distance_sensor.read_mm())
-            print('Distance: ' + distance_in_mm)
-        except:
-            print('no distance')
+    
+        distance_in_mm = str(my_distance_sensor.read_mm())
+        print('Distance: ' + distance_in_mm)
+        print('no distance')
+
         key = cv2.waitKey(1)
         if key == 27:
             break
