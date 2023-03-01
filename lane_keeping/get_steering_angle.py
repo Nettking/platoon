@@ -22,6 +22,8 @@ The smoothed angle is returned as the final steering angle.
 
 import math
 
+last_angle = 90
+
 def get_steering_angle(frame, lane_lines):
     global last_angle
     print('Last Angle: ' + str(last_angle))
