@@ -10,7 +10,7 @@ list: The list of lane lines as arrays of endpoints.
 """
 
 import numpy as np
-import make_points as m_p
+import lane_keeping.make_points as m_p
 from easygopigo3 import EasyGoPiGo3
 
 gpg = EasyGoPiGo3()
