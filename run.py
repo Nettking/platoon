@@ -100,8 +100,6 @@ while True:
         print('Wheel speeds: ' + str(leftSpeed, rightSpeed))
         
 
-<<<<<<< Updated upstream
-=======
         gpg = easy.EasyGoPiGo3()
         
         '''
