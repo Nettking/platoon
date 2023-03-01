@@ -71,13 +71,14 @@ while True:
         edges = detect_edges(frame)
         
         # Select region of interest in the video frame
-        roi = region_of_interest(edges)
+        #roi = region_of_interest(edges)
 
         # Display edges detected in cropped video frame in new window
-        cv2.imshow("Edges in roi", roi)
+        cv2.imshow("Edges", edges)
         
         # Detect line segments in the selected region of interest
-        line_segments = detect_line_segments(roi)
+        # line_segments = detect_line_segments(roi)
+        line_segments = detect_line_segments(edges)
         
         # Fit line segments to obtain the lane lines
         lane_lines = average_slope_intercept(frame,line_segments)
