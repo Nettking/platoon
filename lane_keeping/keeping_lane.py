@@ -1,7 +1,7 @@
 import cv2
 from lane_keeping import detect_edges, region_of_interest, detect_line_segments, average_slope_intercept, display_lines, get_steering_angle, compare_to_last_value, calculate_wheel_speeds, display_heading_line
 
-def keeping_lane(gpg, video):
+async def keeping_lane(gpg, video):
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
@@ -39,7 +39,7 @@ def keeping_lane(gpg, video):
         # Output the validated steering angle and wheel speeds to the console
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed, rightSpeed))
-        return heading_image
+        return await heading_image
         
 
     
