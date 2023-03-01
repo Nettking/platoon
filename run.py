@@ -105,7 +105,11 @@ while True:
     
     # Output the validated steering angle and wheel speeds to the console
     print('Steering angle:' + str(validated_steering_angle))
-    print('Wheel speeds: ' + str(leftSpeed, rightSpeed))
+    print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
+
+    key = cv2.waitKey(1)
+    if key == 27:
+        break
 
     
 # Stop the robot when the loop is ended
