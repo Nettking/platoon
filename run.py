@@ -64,7 +64,6 @@ while True:
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
-        print('Unable to read videoframe')
         
         # Detect edges in the video frame
         edges = detect_edges(frame)
@@ -95,7 +94,7 @@ while True:
         
         # Display the heading line on the video frame
         heading_image = display_heading_line(lane_lines_image, steering_angle)
-        
+        cv2.imshow('Heading line', heading_image)
         # Output the validated steering angle and wheel speeds to the console
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed, rightSpeed))
