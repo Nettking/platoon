@@ -1,5 +1,5 @@
 import time
-from platooning import initialize_distance_sensor
+from platooning.initialize_distance_sensor import initialize_distance_sensor
 
 def get_distance(my_distance_sensor):
     try:
