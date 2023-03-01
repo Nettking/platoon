@@ -35,7 +35,7 @@ gpg.set_speed(100)
 video = cv2.VideoCapture(0)
 video.set(cv2.CAP_PROP_FRAME_WIDTH,320)
 video.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
-
+'''
 # Create a platoon of 6 vehicles
 platoon = Platoon(6)
 
@@ -55,7 +55,7 @@ leader = platoon.vehicles[leader_index]
 # Print the index and distance of the leader
 print("Leader index:", leader_index)
 print("Leader distance:", leader.distance)
-
+'''
 
 # Loop through video frames
 while True:
