@@ -100,14 +100,6 @@ while True:
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed, rightSpeed))
         
-
-        '''
-        Create an instance of the Distance Sensor class.
-        I2C1 and I2C2 are just labels used for identifyng the port on the GoPiGo3 board.
-        But technically, I2C1 and I2C2 are the same thing, so we don't have to pass any port to the constructor.
-        '''
-        
-
     
         distance_in_mm = str(my_distance_sensor.read_mm())
         print('Distance: ' + distance_in_mm)
@@ -115,7 +107,9 @@ while True:
 
         key = cv2.waitKey(1)
         if key == 27:
+            gpg.set_speed(0)
             break
+        
     except:
         gpg.set_speed(0)
     
