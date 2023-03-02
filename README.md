@@ -8,19 +8,21 @@ This repository provides code for the GoPiGo3 robot, an educational and experime
 This research demonstrates the use of computer vision and machine learning in real-world applications, such as autonomous driving. It may be used as a jumping off point for similar projects or as a resource for studying computer vision and machine learning methods.
 
 ## Getting started
+
+First, you need to make sure that your GoPiGo3 has a Raspberry Pi board and that it is connected to the internet.<br />
+
+Open a terminal window on your GoPiGo3 and type the following command to update the packages:<br />
+
+```sh
+sudo apt-get update && sudo apt-get upgrade 
+```
+
 To get started with the project, you'll need to clone the repository and install the required packages:<br />
 ```sh
 git clone https://github.com/Nettking/platoon.git
 ```
 ```sh
 sudo apt update && sudo apt install -y cmake g++ wget unzip
-```
-First, you need to make sure that your GoPiGo3 has a Raspberry Pi board and that it is connected to the internet.<br />
-
-Open a terminal window on your GoPiGo3 and type the following command to update the packages:<br />
-
-```sh
-sudo apt-get update
 ```
 
 Install the dependencies required to build OpenCV:
@@ -47,7 +49,7 @@ cd build
 Run the following command to configure the build with the required options:
 
 ```sh
-cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib-4.5.4/modules -D ENABLE_NEON=ON -D ENABLE_VFPV3=ON -D BUILD_TESTS=OFF -D INSTALL_PYTHON_EXAMPLES=OFF -D BUILD_EXAMPLES=OFF ..
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib-4.3.0/modules -D ENABLE_NEON=ON -D ENABLE_VFPV3=ON -D BUILD_TESTS=OFF -D INSTALL_PYTHON_EXAMPLES=OFF -D BUILD_EXAMPLES=OFF ..
 ```
 
 Build and install OpenCV:
