@@ -27,6 +27,7 @@ from easygopigo3 import EasyGoPiGo3
 
 
 from lane_keeping import *
+from platooning import get_distance
 
 # Initialize GoPiGo3 robot and set speed
 gpg = EasyGoPiGo3()
@@ -107,6 +108,7 @@ while True:
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
 
+        print('Distance: ' + get_distance(gpg))
         key = cv2.waitKey(1)
         if key == 27:
             break
