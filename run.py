@@ -116,10 +116,14 @@ while True:
         distance = get_distance(myDistanceSensor)
         if distance is not None:
             print('Distance: ' + distance)
+            if distance < 100:
+                gpg.set_speed(0)
+
 
         key = cv2.waitKey(1)
         if key == 27:
             break
+
     except:
         gpg.set_speed(0)
     
