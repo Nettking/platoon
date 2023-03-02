@@ -19,22 +19,23 @@ First, you need to make sure that your GoPiGo3 has a Raspberry Pi board and that
 
 Open a terminal window on your GoPiGo3 and type the following command to update the packages:<br />
 
-
+```sh
 sudo apt-get update
 ```
 
 Install the dependencies required to build OpenCV:
 
 ```sh
-sudo apt-get install build-essential cmake pkg-config
+sudo apt-get install build-essential pkg-config
 sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libgtk-3-dev libcanberra-gtk* libatlas-base-dev gfortran python3-dev
 ```
 
 Download the OpenCV source code:
 
-
+```sh
 wget -O opencv.zip https://github.com/opencv/opencv/archive/4.3.0.zip
 unzip opencv.zip
+```
 
 Create a build directory and navigate to it:
 
