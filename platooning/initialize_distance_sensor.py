@@ -1,9 +1,6 @@
 import easygopigo3 as easy
 
-def initialize_distance_sensor():
-    # Create an instance of the GoPiGo3 class. GPG will be the GoPiGo3 object. 
-    gpg = easy.EasyGoPiGo3()
-    
+def initialize_distance_sensor(gpg):
     '''
     Create an instance of the Distance Sensor class.
     I2C1 and I2C2 are just labels used for identifyng the port on the GoPiGo3 board.

@@ -27,11 +27,14 @@ from easygopigo3 import EasyGoPiGo3
 
 
 from lane_keeping import *
-from platooning import get_distance
+from platooning import *
 
 # Initialize GoPiGo3 robot and set speed
 gpg = EasyGoPiGo3()
 gpg.set_speed(100)
+
+# Initialize distance sensor
+myDistanceSensor = initialize_distance_sensor(gpg)
 
 # Initialize video capture and set resolution
 video = cv2.VideoCapture(0)
@@ -108,10 +111,12 @@ while True:
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
         
+        
         # Get distance
         distance = get_distance(gpg)
         if distance is not None:
             print('Distance: ' + distance)
+            
         key = cv2.waitKey(1)
         if key == 27:
             break
