@@ -1,22 +1,10 @@
 import time
-from platooning import initialize_distance_sensor
+from initialize_distance_sensor import initialize_distance_sensor
 
 def get_distance(my_distance_sensor):
-    # Read the distance value from the sensor and return it to a string.
     try:
-        # Initialize a variable to store the total distance
-        total_distance = 0
-
-        # Read the distance sensor 10 times and add the distance to the total
-        for i in range(10):
-            total_distance += my_distance_sensor.read_mm()
-
-        # Calculate the average distance
-        average_distance = total_distance / 10
-        # Return the distance value
-        return average_distance
-    
-    # If there is an error reading the distance value, print an error message and return None
+        distance_in_mm = str(my_distance_sensor.read_mm())
+        return distance_in_mm
     except:
         print("Distance sensor reading error")
         return None
