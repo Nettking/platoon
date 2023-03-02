@@ -27,10 +27,14 @@ from easygopigo3 import EasyGoPiGo3
 
 
 from lane_keeping import *
+from platooning import *
 
 # Initialize GoPiGo3 robot and set speed
 gpg = EasyGoPiGo3()
 gpg.set_speed(100)
+
+# Initialize distance sensor
+myDistanceSensor = initialize_distance_sensor(gpg)
 
 # Initialize video capture and set resolution
 video = cv2.VideoCapture(0)
@@ -107,10 +111,24 @@ while True:
         # Output the validated steering angle and wheel speeds to the console
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
+        
+        
+        # Get distance and adjust speed if too close
+        distance = get_distance(myDistanceSensor)
+        if distance is not None:
+            print('Distance: ' + distance)
+            if int(distance) < 100:
+                gpg.set_speed(0)
+            elif int(distance) < 200:
+                gpg.set_speed(50)
+            else:
+                gpg.set_speed(100)
+
 
         key = cv2.waitKey(1)
         if key == 27:
             break
+
     except:
         gpg.set_speed(0)
     

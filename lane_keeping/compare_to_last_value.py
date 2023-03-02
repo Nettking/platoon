@@ -9,10 +9,14 @@ int or float: The input value if the difference between the input value and the 
 
 """
 
-last_value = 0
 
+# Initialize the last stored value as 90 degrees. 90 +- 100 = 190/-10, which is outside the range of possible steering angles
+# However after the first call to compare_to_last_value, the last stored value will be updated to the input value
+last_value = 90
+
+# If a value is greater than 100 away from the last stored value, it is likely an outlier and should be ignored
 def compare_to_last_value(value):
-    
+    # Import the global variable last_value
     global last_value
     
     # Calculate the difference between the input value and the last stored value
