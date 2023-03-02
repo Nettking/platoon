@@ -52,3 +52,15 @@ def findArUco(frame):
 
             cv2.imshow("ArUco Test", frame)
 
+if __name__ == "__main__":
+    video = cv2.VideoCapture(0)
+    video.set(cv2.CAP_PROP_FRAME_WIDTH,320)
+    video.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
+
+    while True:
+        ret,frame = video.read()
+        findArUco(frame)
+
+        key = cv2.waitKey(1)
+        if key == 27:
+            break
