@@ -107,8 +107,11 @@ while True:
         # Output the validated steering angle and wheel speeds to the console
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
-
-        #print('Distance: ' + get_distance(gpg))
+        
+        # Get distance
+        distance = get_distance(gpg)
+        if distance is not None:
+            print('Distance: ' + distance)
         key = cv2.waitKey(1)
         if key == 27:
             break
