@@ -70,7 +70,7 @@ If everything is working correctly, you should see the version number of OpenCV 
 ```sh
 pip install -r requirements.txt
 ```
-You can then run the run.py script to retrieve the historical data and train the machine learning model:
+You can then run the run.py script:
 ```sh
 python run.py
 ```
