@@ -15,9 +15,7 @@ class PlatoonVehicle:
         # Set the distance of the vehicle
         self.distance = distance
 
-    def __str__(self):
-        # Return a string representation of the vehicle
-        return f"Speed: {self.speed}, Distance: {self.distance}"
+
 
 
 class Platoon:
