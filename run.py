@@ -46,16 +46,16 @@ while True:
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
-        try:
-            data, x_offset, y_offset = locateQR(frame, gpg)
-            print('Data: ')
-            print(str(data))
-            print('X_offset: ')
-            print(str(x_offset))
-            print('Y_offset: ')
-            print(str(y_offset))
-        except:
-            lane_keeping.lane_keeping(frame, gpg)
+        
+        data, x_offset, y_offset = locateQR(frame, gpg)
+        print('Data: ')
+        print(str(data))
+        print('X_offset: ')
+        print(str(x_offset))
+        print('Y_offset: ')
+        print(str(y_offset))
+        
+        lane_keeping(frame, gpg)
         
         
         # Get distance and adjust speed if too close
