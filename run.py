@@ -47,7 +47,7 @@ while True:
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
-        lane_keeping()
+        lane_keeping(frame, gpg)
         
         
         # Get distance and adjust speed if too close
