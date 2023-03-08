@@ -1,6 +1,12 @@
-from lane_keeping import *
+from lane_keeping import detect_edges, region_of_interest, detect_line_segments, average_slope_intercept, display_lines, get_steering_angle, display_heading_line
+import cv2
 
-def lane_keeping(frame):
+
+from lane_keeping import *
+from platooning import *
+
+# Initialize GoPiGo3 robot and set speed
+def lane_keeping(frame, gpg):
             # Detect edges in the video frame
             edges = detect_edges(frame)
             
