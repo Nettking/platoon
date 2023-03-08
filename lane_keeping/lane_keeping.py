@@ -1,9 +1,9 @@
-from detect_edges import detect_edges 
-from region_of_interest import region_of_interest 
-from detect_line_segments import detect_line_segments 
-from average_slope_intercept import *
-from display_lines import *
-from get_steering_angle import *
+from lane_keeping.detect_edges import detect_edges 
+from lane_keeping.region_of_interest import region_of_interest 
+from lane_keeping.detect_line_segments import detect_line_segments 
+from lane_keeping.average_slope_intercept import *
+from lane_keeping.display_lines import *
+from lane_keeping.get_steering_angle import *
 import cv2
 
 
