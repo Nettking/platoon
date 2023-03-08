@@ -22,9 +22,9 @@ def locateQR(frame):
             cv2.rectangle(frame, (left, top), (left+width, top+height), (0, 0, 255), 2)
 
             # Display the barcode data and offsets on the frame
-            print("Data: {}".format(data), (left, top-10))
-            print("X offset: {:.2f}".format(x_offset))
-            print("Y offset: {:.2f}".format(y_offset))
+            #print("Data: {}".format(data), (left, top-10))
+            #print("X offset: {:.2f}".format(x_offset))
+            #print("Y offset: {:.2f}".format(y_offset))
             return data, x_offset, y_offset
         return None
 

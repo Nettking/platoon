@@ -25,8 +25,7 @@ import cv2
 import time
 from easygopigo3 import EasyGoPiGo3
 
-
-from lane_keeping import *
+from lane_keeping import lane_keeping
 from platooning import *
 
 # Initialize GoPiGo3 robot and set speed
@@ -47,7 +46,16 @@ while True:
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
-        lane_keeping(frame, gpg)
+        try:
+            data, x_offset, y_offset = locateQR(frame, gpg)
+            print('Data: ')
+            print(str(data))
+            print('X_offset: ')
+            print(str(x_offset))
+            print('Y_offset: ')
+            print(str(y_offset))
+        except:
+            lane_keeping.lane_keeping(frame, gpg)
         
         
         # Get distance and adjust speed if too close
