@@ -1,35 +1,36 @@
 import cv2
 from pyzbar.pyzbar import decode
 
-# set up camera
-cap = cv2.VideoCapture(0)
-
 while True:
-    # capture frame-by-frame
-    ret, frame = cap.read()
+    frame = cv2.imread('test.jpg')
 
-    # check if the frame was correctly captured
-    if not ret:
-        continue
+    decoded_objs = decode(frame)
 
-    # convert the frame to grayscale
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-    # decode QR code or barcode
-    decoded_objs = decode(gray)
-
-    # display the decoded objects on the frame
     for obj in decoded_objs:
-        cv2.putText(frame, str(obj.data), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
-        cv2.rectangle(frame, (obj.rect.left, obj.rect.top), (obj.rect.left + obj.rect.width, obj.rect.top + obj.rect.height), (0, 255, 0), 2)
+        # Get the barcode's data and type
+        data = obj.data.decode("utf-8")
+        barcode_type = obj.type
 
-    # display the resulting frame
-    cv2.imshow('frame', frame)
+        # Get the barcode's bounding box and calculate the center
+        left, top, width, height = obj.rect
+        center_x = left + (width / 2)
+        center_y = top + (height / 2)
 
-    # exit if the 'q' key is pressed
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        # Calculate the horizontal and vertical offsets from the center of the frame
+        x_offset = center_x - (frame.shape[1] / 2)
+        y_offset = center_y - (frame.shape[0] / 2)
 
-# release the camera and close all windows
-cap.release()
+        # Draw a red rectangle around the barcode
+        cv2.rectangle(frame, (left, top), (left+width, top+height), (0, 0, 255), 2)
+
+        # Display the barcode data and offsets on the frame
+        print( f"Data: {data}", (left, top-10),)
+        print( f"X offset: {x_offset:.2f}")
+        print( f"Y offset: {y_offset:.2f}")
+        #cv2.putText(frame, f"Y offset: {y_offset:.2f}", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+
+    #cv2.imshow("frame", frame)
+
+
+#cap.release()
 cv2.destroyAllWindows()
