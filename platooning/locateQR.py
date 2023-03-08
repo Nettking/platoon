@@ -3,7 +3,8 @@ from pyzbar.pyzbar import decode
 
 def locateQR(frame):
         decoded_objs = decode(frame)
-
+        if decoded_objs == None:
+            raise Exception
         for obj in decoded_objs:
             # Get the barcode's data and type
             data = obj.data.decode("utf-8")
@@ -26,7 +27,7 @@ def locateQR(frame):
             #print("X offset: {:.2f}".format(x_offset))
             #print("Y offset: {:.2f}".format(y_offset))
             return data, x_offset, y_offset
-        return None
+        
 
 
 if '__name__' == '__main__':
