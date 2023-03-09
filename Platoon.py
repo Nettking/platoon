@@ -1,22 +1,4 @@
-class PlatoonVehicle:
-    def __init__(self, speed, distance):
-        
-        # Speed of the vehicle
-        self.speed = speed
-
-        # Distance of the vehicle from the vehicle in front of it
-        self.distance = distance
-
-    def set_speed(self, speed):
-        # Set the speed of the vehicle
-        self.speed = speed
-
-    def set_distance(self, distance):
-        # Set the distance of the vehicle
-        self.distance = distance
-
-
-
+from platooning import *
 
 class Platoon:
     def __init__(self, num_vehicles):
@@ -25,6 +7,7 @@ class Platoon:
 
         # Create a list of vehicles
         self.vehicles = [PlatoonVehicle(0, 0) for _ in range(num_vehicles)]
+        
 
     def set_speed(self, vehicle_index, speed):
         # Set the speed of the specified vehicle
