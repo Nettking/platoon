@@ -35,7 +35,12 @@ if '__name__' == '__main__':
     while True:
         frame = video.read()
         data, x_offset, y_offset = locateQR()    
-            
+        print('Data: ')
+        print(str(data))
+        print('X_offset: ')
+        print(str(x_offset))
+        print('Y_offset: ')
+        print(str(y_offset))
         key = cv2.waitKey(1)
         if key == 27:
             break
