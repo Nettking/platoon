@@ -6,6 +6,7 @@ from lane_keeping.display_lines import *
 from lane_keeping.get_steering_angle import *
 from lane_keeping.compare_to_last_value import *
 from lane_keeping.calculate_wheel_speeds import *
+
 import cv2
 
 
@@ -35,14 +36,7 @@ def follow_lane(frame, gpg):
             # Calculate the steering angle based on the lane lines
             steering_angle = get_steering_angle(frame, lane_lines)
             
-            # Validate the steering angle by comparing it to the last value
-            validated_steering_angle = compare_to_last_value(steering_angle)
-            
-            # Calculate the wheel speeds based on the validated steering angle
-            leftSpeed, rightSpeed = calculate_wheel_speeds(validated_steering_angle)
-            
-            # Control the robot steering based on the calculated wheel speeds
-            gpg.steer(rightSpeed, leftSpeed) 
+            steer_robot(steering_angle, gpg)
             
             # Display the heading line on the video frame
             heading_image = display_heading_line(lane_lines_image, steering_angle)

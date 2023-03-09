@@ -32,7 +32,7 @@ from platooning import *
 
 # Initialize GoPiGo3 robot and set speed
 gpg = EasyGoPiGo3()
-gpg.set_speed(100)
+gpg.set_speed(0)
 
 # Initialize distance sensor
 myDistanceSensor = initialize_distance_sensor(gpg)
@@ -50,6 +50,7 @@ while True:
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
+
         try:
             data, x_offset, y_offset = locateQR(frame)
             print('Data: ')
@@ -59,11 +60,13 @@ while True:
             print('Y_offset: ')
             print(str(y_offset))
             print('Steering Angle: ')
-            print(str(calculate_steering_angle(x_offset)))
+            steering_angle = calculate_steering_angle(x_offset)
+            print(str(steering_angle))
+            steer_robot(steering_angle, gpg)
+ 
         except:
             print('No QR Found')
-        
-        follow_lane(frame, gpg)
+            follow_lane(frame, gpg)
         
         
         # Get distance and adjust speed if too close
@@ -76,6 +79,8 @@ while True:
                 gpg.set_speed(50)
             else:
                 gpg.set_speed(100)
+        else:
+            gpg.set_speed(0)
 
 
         key = cv2.waitKey(1)
