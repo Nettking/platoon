@@ -30,11 +30,12 @@ def locateQR(frame):
 
 
 if '__name__' == '__main__':
-
+    from easygopigo3 import EasyGoPiGo3
+    gpg = EasyGoPiGo3()
     video = cv2.VideoCapture(0)
     while True:
         frame = video.read()
-        data, x_offset, y_offset = locateQR()    
+        data, x_offset, y_offset = locateQR(frame, gpg)    
         print('Data: ')
         print(str(data))
         print('X_offset: ')
