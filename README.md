@@ -16,6 +16,10 @@ Open a terminal window on your GoPiGo3 and type the following command to update 
 ```sh
 sudo apt-get update && sudo apt-get upgrade 
 ```
+Install mosquitto: <br />
+```sh
+sudo apt-get install mosquitto mosquitto-clients && sudo systemctl start mosquitto
+```
 
 To get started with the project, you'll need to clone the repository and install the required packages:<br />
 ```sh
@@ -26,6 +30,7 @@ sudo apt update && sudo apt install -y cmake g++ wget unzip
 ```
 
 Install the dependencies required to build OpenCV:
+
 
 ```sh
 sudo apt-get install build-essential pkg-config
