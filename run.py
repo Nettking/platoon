@@ -24,7 +24,7 @@ The script requires the installation of the OpenCV and EasyGoPiGo3 libraries.
 import cv2
 from init import *
 from platooning import *
-from platooning import control_speed
+
 from lane_keeping import *
 
 video, gpg, myDistanceSensor = init()
@@ -46,7 +46,7 @@ while True:
             print('No QR Found')
             follow_lane(frame, gpg)
         
-        control_speed.control_speed(myDistanceSensor, gpg)
+        control_speed(myDistanceSensor, gpg)
 
         key = cv2.waitKey(1)
         if key == 27:
