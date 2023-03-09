@@ -35,7 +35,7 @@ while True:
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
-
+        key = cv2.waitKey(1)
         try:
             data, x_offset, y_offset = locateQR(frame)
             printQRData(data, x_offset, y_offset)
@@ -48,7 +48,7 @@ while True:
         
         control_speed(myDistanceSensor, gpg)
 
-        key = cv2.waitKey(1)
+        
         if key == 27:
             break
 
