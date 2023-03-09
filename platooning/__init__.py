@@ -1,4 +1,5 @@
+import platooning.Platoon as Platoon
 from platooning.get_distance import *
 from platooning.initialize_distance_sensor import *
 from platooning.locateQR import *
-import platooning.Platoon as Platoon
+from platooning.calculate_steering_angle import *

@@ -28,7 +28,8 @@ from easygopigo3 import EasyGoPiGo3
 
 from lane_keeping import follow_lane
 from platooning import *
-from platooning.locateQR import *
+
+
 # Initialize GoPiGo3 robot and set speed
 gpg = EasyGoPiGo3()
 gpg.set_speed(100)
@@ -41,14 +42,7 @@ video = cv2.VideoCapture(0)
 video.set(cv2.CAP_PROP_FRAME_WIDTH,320)
 video.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
 
-wheelbase = 0.117  # distance between wheels in meters
-max_speed = 100  # maximum speed in meters per second
 
-def calculate_steering_angle(x_offset):
-    # Calculate steering angle in radians
-    steering_angle = atan2(x_offset, wheelbase/2)*180
-
-    return steering_angle
 
 
 # Loop through video frames
@@ -65,9 +59,10 @@ while True:
             print('Y_offset: ')
             print(str(y_offset))
             print('Steering Angle: ')
-            calculate_steering_angle(str(x_offset))
+            print(str(calculate_steering_angle(x_offset)))
         except:
             print('No QR Found')
+        
         follow_lane(frame, gpg)
         
         
