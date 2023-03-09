@@ -15,6 +15,10 @@ from platooning import *
 
 # Initialize GoPiGo3 robot and set speed
 def follow_lane(frame, gpg):
+            
+            # Resize to 1/4 to use for lane keeping
+            frame = cv2.resize(frame, None, fx=0.25, fy=0.25, interpolation=cv2.INTER_LINEAR)
+
             # Detect edges in the video frame
             edges = detect_edges(frame)
             
