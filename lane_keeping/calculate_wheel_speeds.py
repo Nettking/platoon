@@ -22,9 +22,11 @@ def calculate_wheel_speeds(steering_angle):
 
     # Convert steering angle to radians and assign maximum speed to a variable
     steering_angle_rad = math.radians(steering_angle)
-    max_speed = 100
+    max_speed = 80
 
-        # Calculate wheel speeds
+    turnrate = ((turning_radius - wheelbase/2) / turning_radius)/2
+    
+    # Calculate wheel speeds
     if steering_angle >= 85 and steering_angle < 95:
         # Straight ahead
         left_speed = max_speed
@@ -35,13 +37,13 @@ def calculate_wheel_speeds(steering_angle):
 
         # Calculate wheel speeds based on turning radius
         if steering_angle < 85:
-            # Turn left
-            left_speed = max_speed
-            right_speed = max_speed * (1 - (turning_radius - wheelbase/2) / turning_radius)
-        else:
             # Turn right
-            right_speed = max_speed
-            left_speed = max_speed * (1 - (turning_radius - wheelbase/2) / turning_radius)
+            left_speed = max_speed * (1 + turnrate)
+            right_speed = max_speed * (1 - turnrate)
+        else:
+            # Turn left
+            right_speed = max_speed * (1 + turnrate)
+            left_speed = max_speed * (1 - turnrate)
             
     # Apply speed limits
     left_speed = max(60, min(left_speed, 100))
