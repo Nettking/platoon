@@ -19,4 +19,8 @@ def init():
     video = cv2.VideoCapture(0)
     video.set(cv2.CAP_PROP_FRAME_WIDTH,640)
     video.set(cv2.CAP_PROP_FRAME_HEIGHT,480)
+    if video.isOpened() == False:
+        print("Error opening video stream or file")
+        raise Exception("Error opening video stream or file")
+        
     return video, gpg, myDistanceSensor
