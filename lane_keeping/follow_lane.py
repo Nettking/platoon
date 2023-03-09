@@ -16,11 +16,11 @@ from platooning import *
 # Initialize GoPiGo3 robot and set speed
 def follow_lane(frame, gpg):
             
-            # Resize to 1/4 to use for lane keeping
-            frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_LINEAR)
+            # Resize to 1/2 to use for lane keeping
+            resized_frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_LINEAR)
 
             # Detect edges in the video frame
-            edges = detect_edges(frame)
+            edges = detect_edges(resized_frame)
             
             # Select region of interest in the video frame
             roi = region_of_interest(edges)
@@ -29,13 +29,13 @@ def follow_lane(frame, gpg):
             line_segments = detect_line_segments(roi)
             
             # Fit line segments to obtain the lane lines
-            lane_lines = average_slope_intercept(frame,line_segments)
+            lane_lines = average_slope_intercept(resized_frame,line_segments)
             
             # Display the lane lines on the video frame
-            lane_lines_image = display_lines(frame,lane_lines)
+            lane_lines_image = display_lines(resized_frame,lane_lines)
             
             # Calculate the steering angle based on the lane lines
-            steering_angle = get_steering_angle(frame, lane_lines)
+            steering_angle = get_steering_angle(resized_frame, lane_lines)
             
             # Validate the steering angle by comparing it to the last value
             validated_steering_angle = compare_to_last_value(steering_angle)
