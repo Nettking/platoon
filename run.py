@@ -67,7 +67,7 @@ while True:
  
         except:
             print('No QR Found')
-            follow_lane.follow_lane(frame, gpg)
+            follow_lane(frame, gpg)
         
         
         # Get distance and adjust speed if too close
