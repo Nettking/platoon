@@ -26,6 +26,7 @@ import time
 from math import atan2
 from easygopigo3 import EasyGoPiGo3
 
+from lane_keeping import *
 from lane_keeping import follow_lane
 from platooning import *
 
@@ -66,7 +67,7 @@ while True:
  
         except:
             print('No QR Found')
-            follow_lane(frame, gpg)
+            follow_lane.follow_lane(frame, gpg)
         
         
         # Get distance and adjust speed if too close
