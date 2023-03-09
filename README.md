@@ -17,6 +17,11 @@ Open a terminal window on your GoPiGo3 and type the following command to update 
 sudo apt-get update && sudo apt-get upgrade 
 ```
 
+Install mosquitto:<br />
+```sh
+sudo apt-get install mosquitto mosquitto-clients && sudo systemctl start mosquitto
+```
+
 To get started with the project, you'll need to clone the repository and install the required packages:<br />
 ```sh
 git clone https://github.com/Nettking/platoon.git
