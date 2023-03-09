@@ -29,7 +29,7 @@ def locateQR(frame):
         
 
 
-if '__name__' == '__main__':
+if __name__ == '__main__':
     from easygopigo3 import EasyGoPiGo3
     gpg = EasyGoPiGo3()
     video = cv2.VideoCapture(0)
