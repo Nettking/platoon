@@ -32,11 +32,14 @@ def establish_connection(MQTT_BROKER_ADDR, MQTT_BROKER_PORT,MQTT_TOPIC_SUB):
 
 if __name__ == '__main__':
     # Define the MQTT broker address and port
-    MQTT_BROKER_ADDR = "localhost"
+    MQTT_BROKER_ADDR = "158.39.162.197"
     MQTT_BROKER_PORT = 1883
 
     # Define the MQTT topics to subscribe and publish to
     MQTT_TOPIC_SUB = "test/in"
     MQTT_TOPIC_PUB = "test/out"
 
+    establish_connection(MQTT_BROKER_ADDR, MQTT_BROKER_PORT,MQTT_TOPIC_SUB)
+    
+    MQTT_BROKER_ADDR = "158.39.162.181"
     establish_connection(MQTT_BROKER_ADDR, MQTT_BROKER_PORT,MQTT_TOPIC_SUB)
