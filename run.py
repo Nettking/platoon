@@ -26,6 +26,7 @@ from init import *
 from platooning import *
 
 from lane_keeping import *
+from lane_keeping import follow_lane
 
 video, gpg, myDistanceSensor = init()
 
@@ -35,7 +36,7 @@ while True:
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
-        key = cv2.waitKey(1)
+        
         try:
             data, x_offset, y_offset = locateQR(frame)
             printQRData(data, x_offset, y_offset)
@@ -44,11 +45,11 @@ while True:
  
         except:
             print('No QR Found')
-            follow_lane(frame, gpg)
+            follow_lane.follow_lane(frame, gpg)
         
         control_speed(myDistanceSensor, gpg)
 
-        
+        key = cv2.waitKey(1)
         if key == 27:
             break
 
