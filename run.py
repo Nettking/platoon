@@ -22,46 +22,12 @@ The script requires the installation of the OpenCV and EasyGoPiGo3 libraries.
 
 # Beans
 import cv2
-import time
-from easygopigo3 import EasyGoPiGo3
-
-
-from lane_keeping import *
+from init import *
 from platooning import *
 
-# Initialize GoPiGo3 robot and set speed
-gpg = EasyGoPiGo3()
-gpg.set_speed(100)
+from lane_keeping import *
 
-# Initialize distance sensor
-myDistanceSensor = initialize_distance_sensor(gpg)
-
-# Initialize video capture and set resolution
-video = cv2.VideoCapture(0)
-video.set(cv2.CAP_PROP_FRAME_WIDTH,320)
-video.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
-'''
-# Create a platoon of 6 vehicles
-platoon = Platoon(6)
-
-# Set the speed and distance of each vehicle
-platoon.set_speed(0, 60)
-platoon.set_distance(0, 0)
-platoon.set_distance(1, 10)
-platoon.set_distance(2, 20)
-platoon.set_distance(3, 30)
-platoon.set_distance(4, 40)
-platoon.set_distance(5, 50)
-
-# Find the leader of the platoon
-leader_index = platoon.get_leader()
-leader = platoon.vehicles[leader_index]
-
-# Print the index and distance of the leader
-print("Leader index:", leader_index)
-print("Leader distance:", leader.distance)
-'''
-
+video, gpg, myDistanceSensor = init()
 
 
 # Loop through video frames
@@ -69,60 +35,18 @@ while True:
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
-        
 
-        # Detect edges in the video frame
-        edges = detect_edges(frame)
+        try:
+            data, x_offset, y_offset = locateQR(frame)
+            printQRData(data, x_offset, y_offset)
+            steering_angle = calculate_steering_angle(x_offset)
+            steer_robot(steering_angle, gpg)
+ 
+        except:
+            print('No QR Found')
+            follow_lane(frame, gpg)
         
-        # Select region of interest in the video frame
-        roi = region_of_interest(edges)
-
-        # Display edges detected in cropped video frame in new window
-        cv2.imshow("Edges in roi", roi)
-        
-        # Detect line segments in the selected region of interest
-        line_segments = detect_line_segments(roi)
-        
-        # Fit line segments to obtain the lane lines
-        lane_lines = average_slope_intercept(frame,line_segments)
-        
-        # Display the lane lines on the video frame
-        lane_lines_image = display_lines(frame,lane_lines)
-        
-        # Calculate the steering angle based on the lane lines
-        steering_angle = get_steering_angle(frame, lane_lines)
-        
-        # Validate the steering angle by comparing it to the last value
-        validated_steering_angle = compare_to_last_value(steering_angle)
-        
-        # Calculate the wheel speeds based on the validated steering angle
-        leftSpeed, rightSpeed = calculate_wheel_speeds(validated_steering_angle)
-        
-        # Control the robot steering based on the calculated wheel speeds
-        gpg.steer(rightSpeed, leftSpeed) 
-        
-        # Display the heading line on the video frame
-        heading_image = display_heading_line(lane_lines_image, steering_angle)
-
-        # Display final video with heading line in new window
-        cv2.imshow("Heading line", heading_image)
-        
-        # Output the validated steering angle and wheel speeds to the console
-        print('Steering angle:' + str(validated_steering_angle))
-        print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
-        
-        
-        # Get distance and adjust speed if too close
-        distance = get_distance(myDistanceSensor)
-        if distance is not None:
-            print('Distance: ' + distance)
-            if int(distance) < 100:
-                gpg.set_speed(0)
-            elif int(distance) < 200:
-                gpg.set_speed(50)
-            else:
-                gpg.set_speed(100)
-
+        control_speed(myDistanceSensor, gpg)
 
         key = cv2.waitKey(1)
         if key == 27:
