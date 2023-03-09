@@ -15,7 +15,9 @@ def on_message(client, userdata, message):
     print("Received message: " + payload)
 
     # Publish a response message back to the specified topic
-    client.publish(MQTT_TOPIC_PUB, "Received: " + payload)
+    response = "Received: " + payload
+    client.publish(MQTT_TOPIC_PUB, response)
+    print("Published response: " + response)
 
 # Set up the MQTT client and connect to the broker
 client = mqtt.Client()
@@ -26,6 +28,11 @@ client.on_message = on_message
 
 # Subscribe to the specified topic
 client.subscribe(MQTT_TOPIC_SUB)
+
+# Publish a message to the specified topic
+message = "Hello, world!"
+client.publish(MQTT_TOPIC_SUB, message)
+print("Published message: " + message)
 
 # Start the MQTT client loop to process incoming messages
 client.loop_forever()
