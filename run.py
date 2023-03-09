@@ -23,9 +23,10 @@ The script requires the installation of the OpenCV and EasyGoPiGo3 libraries.
 # Beans
 import cv2
 import time
+from math import atan2
 from easygopigo3 import EasyGoPiGo3
 
-from lane_keeping import lane_keeping
+from lane_keeping import follow_lane
 from platooning import *
 from platooning.locateQR import *
 # Initialize GoPiGo3 robot and set speed
@@ -40,6 +41,15 @@ video = cv2.VideoCapture(0)
 video.set(cv2.CAP_PROP_FRAME_WIDTH,320)
 video.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
 
+wheelbase = 0.117  # distance between wheels in meters
+max_speed = 100  # maximum speed in meters per second
+
+def calculate_steering_angle(x_offset):
+    # Calculate steering angle in radians
+    steering_angle = atan2(x_offset, wheelbase/2)*180
+
+    return steering_angle
+
 
 # Loop through video frames
 while True:
@@ -47,16 +57,18 @@ while True:
         # Read a video frame from the camera
         ret,frame = video.read()
         try:
-            data, x_offset, y_offset = locateQR(frame, gpg)
+            data, x_offset, y_offset = locateQR(frame)
             print('Data: ')
             print(str(data))
             print('X_offset: ')
             print(str(x_offset))
             print('Y_offset: ')
             print(str(y_offset))
+            print('Steering Angle: ')
+            calculate_steering_angle(str(x_offset))
         except:
             print('No QR Found')
-        lane_keeping(frame, gpg)
+        follow_lane(frame, gpg)
         
         
         # Get distance and adjust speed if too close

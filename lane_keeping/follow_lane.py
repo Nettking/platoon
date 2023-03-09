@@ -13,7 +13,7 @@ from lane_keeping import *
 from platooning import *
 
 # Initialize GoPiGo3 robot and set speed
-def lane_keeping(frame, gpg):
+def follow_lane(frame, gpg):
             # Detect edges in the video frame
             edges = detect_edges(frame)
             

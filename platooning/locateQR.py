@@ -41,11 +41,9 @@ if __name__ == '__main__':
         print(str(x_offset))
         print('Y_offset: ')
         print(str(y_offset))
+        #cv2.imshow("frame", frame)
         key = cv2.waitKey(1)
         if key == 27:
             break
-        #cv2.imshow("frame", frame)
-
-
-    #cap.release()
+    
     cv2.destroyAllWindows()
