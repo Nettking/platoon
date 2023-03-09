@@ -36,7 +36,11 @@ def follow_lane(frame, gpg):
             # Calculate the steering angle based on the lane lines
             steering_angle = get_steering_angle(frame, lane_lines)
             
-            steer_robot(steering_angle, gpg)
+            # Validate the steering angle by comparing it to the last value
+            validated_steering_angle = compare_to_last_value(steering_angle)
+            
+            # Calculate the wheel speeds based on the validated steering angle
+            leftSpeed, rightSpeed = calculate_wheel_speeds(validated_steering_angle)
             
             # Display the heading line on the video frame
             heading_image = display_heading_line(lane_lines_image, steering_angle)
