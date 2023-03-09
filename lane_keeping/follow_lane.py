@@ -20,9 +20,6 @@ def follow_lane(frame, gpg):
             
             # Select region of interest in the video frame
             roi = region_of_interest(edges)
-
-            # Display edges detected in cropped video frame in new window
-            cv2.imshow("Edges in roi", roi)
             
             # Detect line segments in the selected region of interest
             line_segments = detect_line_segments(roi)
