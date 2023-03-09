@@ -27,7 +27,7 @@ from easygopigo3 import EasyGoPiGo3
 
 from lane_keeping import lane_keeping
 from platooning import *
-
+from platooning.locateQR import *
 # Initialize GoPiGo3 robot and set speed
 gpg = EasyGoPiGo3()
 gpg.set_speed(100)
@@ -46,15 +46,16 @@ while True:
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
-        
-        data, x_offset, y_offset = locateQR(frame, gpg)
-        print('Data: ')
-        print(str(data))
-        print('X_offset: ')
-        print(str(x_offset))
-        print('Y_offset: ')
-        print(str(y_offset))
-        
+        try:
+            data, x_offset, y_offset = locateQR(frame, gpg)
+            print('Data: ')
+            print(str(data))
+            print('X_offset: ')
+            print(str(x_offset))
+            print('Y_offset: ')
+            print(str(y_offset))
+        except:
+            print('No QR Found')
         lane_keeping(frame, gpg)
         
         
