@@ -5,3 +5,4 @@ from platooning.locateQR import *
 from platooning.calculate_steering_angle import *
 from platooning.steer_robot import *
 from platooning.printQRData import *
+from platooning.control_speed import *

@@ -22,28 +22,9 @@ The script requires the installation of the OpenCV and EasyGoPiGo3 libraries.
 
 # Beans
 import cv2
+from init import *
 
-from math import atan2
-from easygopigo3 import EasyGoPiGo3
-
-from lane_keeping import *
-from lane_keeping import follow_lane
-from platooning import *
-
-
-# Initialize GoPiGo3 robot and set speed
-gpg = EasyGoPiGo3()
-gpg.set_speed(0)
-
-# Initialize distance sensor
-myDistanceSensor = initialize_distance_sensor(gpg)
-
-# Initialize video capture and set resolution
-video = cv2.VideoCapture(0)
-video.set(cv2.CAP_PROP_FRAME_WIDTH,320)
-video.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
-
-
+video, gpg, myDistanceSensor = init()
 
 
 # Loop through video frames
@@ -62,20 +43,7 @@ while True:
             print('No QR Found')
             follow_lane(frame, gpg)
         
-        
-        # Get distance and adjust speed if too close
-        distance = get_distance(myDistanceSensor)
-        if distance is not None:
-            print('Distance: ' + distance)
-            if int(distance) < 100:
-                gpg.set_speed(0)
-            elif int(distance) < 200:
-                gpg.set_speed(50)
-            else:
-                gpg.set_speed(100)
-        else:
-            gpg.set_speed(0)
-
+        control_speed(myDistanceSensor, gpg)
 
         key = cv2.waitKey(1)
         if key == 27:
