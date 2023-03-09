@@ -21,26 +21,18 @@ def locateQR(frame):
 
             # Draw a red rectangle around the barcode
             cv2.rectangle(frame, (left, top), (left+width, top+height), (0, 0, 255), 2)
-            # Display the barcode data and offsets on the frame
-            #print("Data: {}".format(data), (left, top-10))
-            #print("X offset: {:.2f}".format(x_offset))
-            #print("Y offset: {:.2f}".format(y_offset))
+
             return data, x_offset, y_offset
         
 
 
 if __name__ == '__main__':
-
+    from platooning import *
     video = cv2.VideoCapture(0)
     while True:
         frame = video.read()
         data, x_offset, y_offset = locateQR(frame)    
-        print('Data: ')
-        print(str(data))
-        print('X_offset: ')
-        print(str(x_offset))
-        print('Y_offset: ')
-        print(str(y_offset))
+        printQRData(data,x_offset,y_offset)
         #cv2.imshow("frame", frame)
         key = cv2.waitKey(1)
         if key == 27:

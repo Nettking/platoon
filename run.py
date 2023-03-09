@@ -22,7 +22,7 @@ The script requires the installation of the OpenCV and EasyGoPiGo3 libraries.
 
 # Beans
 import cv2
-import time
+
 from math import atan2
 from easygopigo3 import EasyGoPiGo3
 
@@ -54,15 +54,8 @@ while True:
 
         try:
             data, x_offset, y_offset = locateQR(frame)
-            print('Data: ')
-            print(str(data))
-            print('X_offset: ')
-            print(str(x_offset))
-            print('Y_offset: ')
-            print(str(y_offset))
-            print('Steering Angle: ')
+            printQRData(data, x_offset, y_offset)
             steering_angle = calculate_steering_angle(x_offset)
-            print(str(steering_angle))
             steer_robot(steering_angle, gpg)
  
         except:
