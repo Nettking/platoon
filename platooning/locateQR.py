@@ -1,5 +1,6 @@
 import cv2
 from pyzbar.pyzbar import decode
+from platooning import *
 
 def locateQR(frame):
         decoded_objs = decode(frame)
