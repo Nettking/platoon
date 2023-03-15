@@ -162,7 +162,7 @@ class PlatoonVehicle:
 
     @staticmethod            
     def average_slope_intercept(self, frame, line_segments):
-
+        print('entered avg')
         # Initialize the list of lane lines
         lane_lines = []
 
