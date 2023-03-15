@@ -3,6 +3,8 @@ from PlatoonVehicle import *
 # Create an instance of PlatoonVehicle class
 vehicle = PlatoonVehicle()
 video = vehicle.video
+gpg = vehicle.gpg
+distance_sensor = vehicle.distance_sensor
 
 
 while True:
@@ -14,14 +16,14 @@ while True:
             data, x_offset, y_offset = vehicle.locateQR(frame)
             vehicle.printQRData(data, x_offset, y_offset)
             steering_angle = vehicle.calculate_steering_angle(x_offset)
-            vehicle.steer_robot(steering_angle, vehicle.gpg)
+            vehicle.steer_robot(steering_angle, gpg)
 
 
         except:
             print('No QR Found')
             
-        vehicle.follow_lane(frame, vehicle.gpg)
-        vehicle.control_speed(vehicle.distance_sensor, vehicle.gpg)
+        vehicle.follow_lane(frame, gpg)
+        vehicle.control_speed(distance_sensor, gpg)
 
         key = waitKey(1)
         if key == 27:
