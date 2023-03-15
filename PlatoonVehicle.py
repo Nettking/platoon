@@ -35,7 +35,7 @@ class PlatoonVehicle:
             return my_distance_sensor
 
         @staticmethod
-        def init(self):
+        def initialize_self(self):
             # Initialize GoPiGo3 robot and set speed
             gpg = self.gpg
             gpg.set_speed(0)
