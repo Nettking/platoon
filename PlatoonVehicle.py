@@ -23,21 +23,17 @@ class PlatoonVehicle:
         self.gpg.set_speed(0)
 
         # Initialize video capture and set resolution
-        video = VideoCapture(0)
-        video.set(CAP_PROP_FRAME_WIDTH,320)
-        video.set(CAP_PROP_FRAME_HEIGHT,240)
+        self.video = VideoCapture(0)
+        self.video.set(CAP_PROP_FRAME_WIDTH,320)
+        self.video.set(CAP_PROP_FRAME_HEIGHT,240)
 
-
+        self.my_distance_sensor = self.gpg.init_distance_sensor()
 
         self.MQTT_BROKER_PORT = MQTT_BROKER_PORT
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
 
-        @property
-        def distance_sensor(self):
-            my_distance_sensor = self.gpg.init_distance_sensor()
-            return my_distance_sensor
-
+    
             
         @staticmethod
         def locateQR(frame):
