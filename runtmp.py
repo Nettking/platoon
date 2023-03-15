@@ -25,7 +25,7 @@ import cv2
 from init import *
 from platooning import *
 from Platoon import *
-from PlatoonVehicle import follow_lane
+from PlatoonVehicle import *
 
 video, gpg, myDistanceSensor = init()
 
