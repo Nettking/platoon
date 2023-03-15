@@ -62,7 +62,7 @@ class PlatoonVehicle:
 
 
 
-    
+    @staticmethod
     def make_points(frame, line):
         # Get the height and width of the input frame
         height, width, _ = frame.shape
@@ -213,7 +213,7 @@ class PlatoonVehicle:
                     # If the slope is positive, the line segment is on the right side of the image
                     if x1 > right_region_boundary and x2 > right_region_boundary:
                         right_fit.append((slope, intercept))
-
+        print('Done iterating')
         # Calculate the average slope and intercept for the left and right line fits
         left_fit_average = np.average(left_fit, axis=0)
         # If there are no left line fits, return an empty list of lane lines
