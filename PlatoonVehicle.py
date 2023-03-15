@@ -360,10 +360,10 @@ class PlatoonVehicle:
     def follow_lane(self, frame, gpg):
         
         # Resize to 1/2 to use for lane keeping
-        resized_frame = frame#resize(frame, (0, 0), fx=0.5, fy=0.5)
+        #resized_frame = frame#resize(frame, (0, 0), fx=0.5, fy=0.5)
         print('Resize to 1/2 to use for lane keeping')
         # Detect edges in the video frame
-        edges = self.detect_edges(resized_frame)
+        edges = self.detect_edges(frame)
         print('Detected edges')
         # Select region of interest in the video frame
         roi = self.region_of_interest(edges)
@@ -372,13 +372,14 @@ class PlatoonVehicle:
         line_segments = self.detect_line_segments(roi)
         print('Set linesegments')
         # Fit line segments to obtain the lane lines
-        lane_lines = self.average_slope_intercept(roi,line_segments)
+        lane_lines = self.average_slope_intercept(frame,line_segments)
         print('Lane lines')
         # Display the lane lines on the video frame
         lane_lines_image = self.display_lines(frame,lane_lines)
         print('lane lines image')
+        
         # Calculate the steering angle based on the lane lines
-        steering_angle = self.get_steering_angle(roi, lane_lines)
+        steering_angle = self.get_steering_angle(frame, lane_lines)
         print('Steering angle')
         # Validate the steering angle by comparing it to the last value
         validated_steering_angle = self.compare_to_last_angle(steering_angle)
