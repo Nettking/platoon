@@ -372,13 +372,13 @@ class PlatoonVehicle:
         line_segments = self.detect_line_segments(roi)
         print('Set linesegments')
         # Fit line segments to obtain the lane lines
-        lane_lines = self.average_slope_intercept(resized_frame,line_segments)
+        lane_lines = self.average_slope_intercept(roi,line_segments)
         print('Lane lines')
         # Display the lane lines on the video frame
-        lane_lines_image = self.display_lines(resized_frame,lane_lines)
+        lane_lines_image = self.display_lines(frame,lane_lines)
         print('lane lines image')
         # Calculate the steering angle based on the lane lines
-        steering_angle = self.get_steering_angle(resized_frame, lane_lines)
+        steering_angle = self.get_steering_angle(roi, lane_lines)
         print('Steering angle')
         # Validate the steering angle by comparing it to the last value
         validated_steering_angle = self.compare_to_last_angle(steering_angle)
