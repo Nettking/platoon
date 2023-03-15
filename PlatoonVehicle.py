@@ -236,9 +236,9 @@ class PlatoonVehicle:
         print('line image')
         # Draw lines on the line image using the OpenCV line() function.
         if lines is not None:
-            for line in lines:
+            for line_piece in lines:
                 print('iterating display lines')
-                for x1, y1, x2, y2 in line:
+                for x1, y1, x2, y2 in line_piece:
                     # Draw the line on the line image using OpenCV.
                     line(line_image, (x1, y1), (x2, y2), line_color, line_width)
             print('done iterating display lines')
