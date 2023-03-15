@@ -228,7 +228,7 @@ class PlatoonVehicle:
 
         return lane_lines
 
-    @staticmethod
+
     def display_lines(frame, lines, line_color=(0, 255, 0), line_width=6):
 
 
