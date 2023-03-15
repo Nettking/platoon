@@ -247,7 +247,7 @@ class PlatoonVehicle:
     
         return line_image
 
-    
+    @staticmethod
     def display_heading_line(frame, steering_angle, line_color=(0, 0, 255), line_width=5 ):
 
         heading_image = np.zeros_like(frame)  # Create a black image of the same size as the input frame.
