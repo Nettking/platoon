@@ -403,7 +403,7 @@ class PlatoonVehicle:
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
 
-
+    @staticmethod
     def get_distance(my_distance_sensor):
         try:
             distance_in_mm = str(my_distance_sensor.read_mm())
@@ -414,8 +414,10 @@ class PlatoonVehicle:
 
 
     def control_speed(self, myDistanceSensor, gpg):
+        print('entered control speed')
         # Get distance and adjust speed if too close
         distance = self.get_distance(myDistanceSensor)
+        print('Collected distance')
         if distance is not None:
             print('Distance: ' + distance)
             if int(distance) < 100:
