@@ -52,12 +52,13 @@ def get_steering_angle(frame, lane_lines):
         y_offset = int(height / 2)
         
     # Calculate the angle to the center of the lane
-    angle_to_mid_radian = math.atan(x_offset / y_offset)
+    angle_to_mid_radian = math.atan(x_offset / y_offset) #Switch to atan2?
     angle_to_mid_deg = int(angle_to_mid_radian * 180.0 / math.pi)  
     steering_angle = angle_to_mid_deg + 90
     
     # Smooth the steering angle
     smooth_angle = (last_angle*2 + steering_angle)/3
     last_angle = smooth_angle
-    
+    # Weighted averaging ARMA filter (Type of lowpass filter)
+
     return smooth_angle

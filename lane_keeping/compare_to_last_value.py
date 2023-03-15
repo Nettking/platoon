@@ -34,3 +34,5 @@ def compare_to_last_value(value):
         last_value = value
         # Return the last stored value
         return last_value
+
+# Outlier filter
