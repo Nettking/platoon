@@ -11,23 +11,24 @@ while True:
         ret,frame = video.read()
 
         try:
-            data, x_offset, y_offset = PlatoonVehicle.locateQR(frame)
-            PlatoonVehicle.printQRData(data, x_offset, y_offset)
-            steering_angle = PlatoonVehicle.calculate_steering_angle(x_offset)
-            PlatoonVehicle.steer_robot(steering_angle, vehicle.gpg)
+            data, x_offset, y_offset = vehicle.locateQR(frame)
+            vehicle.printQRData(data, x_offset, y_offset)
+            steering_angle = vehicle.calculate_steering_angle(x_offset)
+            vehicle.steer_robot(steering_angle, vehicle.gpg)
 
 
         except:
             print('No QR Found')
             
-        PlatoonVehicle.follow_lane(frame, vehicle.gpg)
-        PlatoonVehicle.control_speed(vehicle.distance_sensor, vehicle.gpg)
+        vehicle.follow_lane(frame, vehicle.gpg)
+        vehicle.control_speed(vehicle.distance_sensor, vehicle.gpg)
 
         key = waitKey(1)
         if key == 27:
             break
 
     except:
+        print('Unable to follow lane')
         vehicle.gpg.set_speed(0)
     
 # Stop the robot when the loop is ended
