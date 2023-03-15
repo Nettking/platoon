@@ -103,7 +103,7 @@ class PlatoonVehicle:
             self.last_angle = angle
             # Return the last stored value
             return self.last_angle
-
+    @staticmethod
     def detect_edges(frame):
 
         # Convert the color image to grayscale
