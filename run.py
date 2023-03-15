@@ -27,8 +27,9 @@ from cv2 import waitKey, destroyAllWindows
 
 # Create an instance of PlatoonVehicle class
 vehicle = PlatoonVehicle(speed=100, distance=10)
-
-video, gpg, myDistanceSensor = vehicle.initialize_self()
+myDistanceSensor = vehicle.distance_sensor
+video = vehicle.video
+gpg = vehicle.gpg
 
 
 # Loop through video frames

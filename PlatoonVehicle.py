@@ -19,36 +19,26 @@ class PlatoonVehicle:
          
         self.gpg = EasyGoPiGo3()
         self.last_angle = 90
+        
+        self.gpg.set_speed(0)
+
+        # Initialize video capture and set resolution
+        video = VideoCapture(0)
+        video.set(CAP_PROP_FRAME_WIDTH,320)
+        video.set(CAP_PROP_FRAME_HEIGHT,240)
+
+
 
         self.MQTT_BROKER_PORT = MQTT_BROKER_PORT
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
 
-        @staticmethod
-        def initialize_distance_sensor(self):
-            '''
-            Create an instance of the Distance Sensor class.
-            I2C1 and I2C2 are just labels used for identifyng the port on the GoPiGo3 board.
-            But technically, I2C1 and I2C2 are the same thing, so we don't have to pass any port to the constructor.
-            '''
+        @property
+        def distance_sensor(self):
             my_distance_sensor = self.gpg.init_distance_sensor()
             return my_distance_sensor
 
-        @staticmethod
-        def initialize_self(self):
-            # Initialize GoPiGo3 robot and set speed
-            gpg = self.gpg
-            gpg.set_speed(0)
-
-            # Initialize distance sensor
-            myDistanceSensor = initialize_distance_sensor(gpg)
-
-            # Initialize video capture and set resolution
-            video = VideoCapture(0)
-            video.set(CAP_PROP_FRAME_WIDTH,320)
-            video.set(CAP_PROP_FRAME_HEIGHT,240)
-            return video, gpg, myDistanceSensor
-
+            
         @staticmethod
         def locateQR(frame):
             decoded_objs = decode(frame)
