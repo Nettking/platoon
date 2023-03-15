@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream:platooning/Platoon.py
 class PlatoonVehicle:
     def __init__(self, speed, distance):
         
@@ -17,6 +18,10 @@ class PlatoonVehicle:
 
 
 
+=======
+from platooning import *
+import PlatoonVehicle
+>>>>>>> Stashed changes:Platoon.py
 
 class Platoon:
     def __init__(self, num_vehicles):

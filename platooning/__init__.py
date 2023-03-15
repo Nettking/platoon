@@ -5,4 +5,9 @@ from platooning.locateQR import *
 from platooning.calculate_steering_angle import *
 from platooning.steer_robot import *
 from platooning.printQRData import *
+<<<<<<< Updated upstream
 from platooning.control_speed import *
+=======
+from platooning.control_speed import *
+from platooning.get_broadcast_ip_address import *
+>>>>>>> Stashed changes
