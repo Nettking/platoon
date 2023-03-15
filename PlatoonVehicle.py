@@ -230,21 +230,21 @@ class PlatoonVehicle:
 
 
     def display_lines(self, frame, lines, line_color=(0, 255, 0), line_width=6):
-        print('entered display lines')
+        
 
         line_image = np.zeros_like(frame)
-        print('line image')
+        
         # Draw lines on the line image using the OpenCV line() function.
         if lines is not None:
             for line_piece in lines:
-                print('iterating display lines')
+                
                 for x1, y1, x2, y2 in line_piece:
                     # Draw the line on the line image using OpenCV.
                     line(line_image, (x1, y1), (x2, y2), line_color, line_width)
-            print('done iterating display lines')
+            
         # Combine the line image with the original frame using the OpenCV addWeighted() function.
         line_image = addWeighted(frame, 0.8, line_image, 1, 1)
-        print('draw line')
+    
         return line_image
 
     
@@ -272,7 +272,7 @@ class PlatoonVehicle:
         return heading_image
 
 
-    
+    @staticmethod
     def calculate_wheel_speeds(steering_angle, wheelbase = 0.117, max_speed = 100, min_speed = 60):
         
         # Validate steering angle input
