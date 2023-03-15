@@ -233,17 +233,18 @@ class PlatoonVehicle:
         print('entered display lines')
 
         line_image = np.zeros_like(frame)
-        
+        print('line image')
         # Draw lines on the line image using the OpenCV line() function.
         if lines is not None:
             for line in lines:
+                print('iterating display lines')
                 for x1, y1, x2, y2 in line:
                     # Draw the line on the line image using OpenCV.
                     line(line_image, (x1, y1), (x2, y2), line_color, line_width)
-
+            print('done iterating display lines')
         # Combine the line image with the original frame using the OpenCV addWeighted() function.
         line_image = addWeighted(frame, 0.8, line_image, 1, 1)
-
+        print('draw line')
         return line_image
 
     
