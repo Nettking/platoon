@@ -117,7 +117,7 @@ class PlatoonVehicle:
 
         return edges
 
-    
+    @staticmethod
     def region_of_interest(edges):
 
         # Get the height and width of the input image
@@ -142,7 +142,7 @@ class PlatoonVehicle:
         
         return cropped_edges
 
-    
+    @staticmethod
     def detect_line_segments(cropped_edges):
 
         # Set the distance resolution of the Hough grid in pixels
@@ -160,7 +160,7 @@ class PlatoonVehicle:
         
         return line_segments
 
-                
+    @staticmethod            
     def average_slope_intercept(self, frame, line_segments):
 
         # Initialize the list of lane lines
