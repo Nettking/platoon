@@ -229,7 +229,7 @@ class PlatoonVehicle:
         return lane_lines
 
 
-    def display_lines(frame, lines, line_color=(0, 255, 0), line_width=6):
+    def display_lines(self, frame, lines, line_color=(0, 255, 0), line_width=6):
 
 
         line_image = np.zeros_like(frame)
