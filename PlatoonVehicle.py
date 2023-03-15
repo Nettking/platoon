@@ -35,7 +35,7 @@ class PlatoonVehicle:
 
     
         
-    @staticmethod
+    
     def locateQR(frame):
         decoded_objs = decode(frame)
         if decoded_objs == None:
@@ -61,7 +61,7 @@ class PlatoonVehicle:
 
 
 
-    @staticmethod
+    
     def make_points(frame, line):
         # Get the height and width of the input frame
         height, width, _ = frame.shape
@@ -85,7 +85,7 @@ class PlatoonVehicle:
         # Return the endpoints of the line as a list of two points
         return [[x1, y1, x2, y2]]
 
-    @staticmethod
+    
     def compare_to_last_angle(self, angle):
         # Calculate the difference between the input value and the last stored value
         diff = abs(self.last_angle - angle)
@@ -103,7 +103,6 @@ class PlatoonVehicle:
             # Return the last stored value
             return self.last_angle
 
-    @staticmethod
     def detect_edges(frame):
 
         # Convert the color image to grayscale
@@ -117,7 +116,7 @@ class PlatoonVehicle:
 
         return edges
 
-    @staticmethod
+    
     def region_of_interest(edges):
 
         # Get the height and width of the input image
@@ -142,7 +141,7 @@ class PlatoonVehicle:
         
         return cropped_edges
 
-    @staticmethod
+    
     def detect_line_segments(cropped_edges):
 
         # Set the distance resolution of the Hough grid in pixels
@@ -160,7 +159,7 @@ class PlatoonVehicle:
         
         return line_segments
 
-    @staticmethod            
+                
     def average_slope_intercept(self, frame, line_segments):
 
         # Initialize the list of lane lines
@@ -225,7 +224,7 @@ class PlatoonVehicle:
 
         return lane_lines
 
-    @staticmethod
+    
     def display_lines(frame, lines, line_color=(0, 255, 0), line_width=6):
 
 
@@ -243,7 +242,7 @@ class PlatoonVehicle:
 
         return line_image
 
-    @staticmethod
+    
     def display_heading_line(frame, steering_angle, line_color=(0, 0, 255), line_width=5 ):
 
         heading_image = np.zeros_like(frame)  # Create a black image of the same size as the input frame.
@@ -268,7 +267,7 @@ class PlatoonVehicle:
         return heading_image
 
 
-    @staticmethod
+    
     def calculate_wheel_speeds(steering_angle, wheelbase = 0.117, max_speed = 100, min_speed = 60):
         
         # Validate steering angle input
@@ -306,7 +305,7 @@ class PlatoonVehicle:
         # Return wheel speeds
         return left_speed, right_speed
 
-    @staticmethod
+    
     def get_steering_angle(self, frame, lane_lines):
         
         print('Last Angle: ' + str(self.last_angle))
@@ -345,7 +344,7 @@ class PlatoonVehicle:
         
         return smooth_angle
 
-    @staticmethod
+    
     def steer_robot(self, steering_angle, gpg):
         # Validate the steering angle by comparing it to the last value
         validated_steering_angle = self.compare_to_last_angle(steering_angle)
@@ -356,7 +355,7 @@ class PlatoonVehicle:
         # Control the robot steering based on the calculated wheel speeds
         gpg.steer(rightSpeed, leftSpeed)
 
-    @staticmethod
+    
     def follow_lane(self, frame, gpg):
         
         # Resize to 1/2 to use for lane keeping
@@ -398,7 +397,7 @@ class PlatoonVehicle:
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
 
-    @staticmethod
+
     def get_distance(my_distance_sensor):
         try:
             distance_in_mm = str(my_distance_sensor.read_mm())
@@ -407,7 +406,7 @@ class PlatoonVehicle:
             print("Distance sensor reading error")
             return None
 
-    @staticmethod
+
     def control_speed(self, myDistanceSensor, gpg):
         # Get distance and adjust speed if too close
         distance = self.get_distance(myDistanceSensor)
@@ -423,7 +422,7 @@ class PlatoonVehicle:
             gpg.set_speed(0)
 
 
-    @staticmethod
+    
     def calculate_steering_angle(x_offset, wheelbase=0.117):
         k = 10
         steering_angle = x_offset * k
@@ -436,7 +435,6 @@ class PlatoonVehicle:
 
         return steering_angle
 
-    @staticmethod
     def printQRData(self, data, x_offset, y_offset):
         print('Data: ')
         print(str(data))
