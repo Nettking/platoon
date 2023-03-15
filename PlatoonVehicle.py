@@ -27,7 +27,7 @@ class PlatoonVehicle:
         self.video.set(CAP_PROP_FRAME_WIDTH,320)
         self.video.set(CAP_PROP_FRAME_HEIGHT,240)
 
-        self.my_distance_sensor = self.gpg.init_distance_sensor()
+        self.distance_sensor = self.gpg.init_distance_sensor()
 
         self.MQTT_BROKER_PORT = MQTT_BROKER_PORT
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
