@@ -1,7 +1,7 @@
 import math
 import numpy as np
 from easygopigo3 import EasyGoPiGo3
-from cv2 import cvtColor, GaussianBlur, Canny, HoughLinesP, line, addWeighted, resize, imshow, fillPoly, bitwise_and, VideoCapture, rectangle, CAP_PROP_FRAME_WIDTH, CAP_PROP_FRAME_HEIGHT, COLOR_BGR2GRAY
+from cv2 import cvtColor, GaussianBlur, Canny, HoughLinesP, line, addWeighted, resize, imshow, fillPoly, bitwise_and, VideoCapture, rectangle, CAP_PROP_FRAME_WIDTH, CAP_PROP_FRAME_HEIGHT, COLOR_BGR2GRAY, waitKey, destroyAllWindows
 from pyzbar.pyzbar import decode
 
 
@@ -228,10 +228,7 @@ class PlatoonVehicle:
         @staticmethod
         def display_lines(frame, lines, line_color=(0, 255, 0), line_width=6):
     
-            '''
-            line_image initializes a new NumPy array with zeros having the same shape as the input video frame. 
-            The resulting line_image array will be used to draw the detected lane lines and will have the same dimensions as the input frame. 
-            '''
+
             line_image = np.zeros_like(frame)
             
             # Draw lines on the line image using the OpenCV line() function.
@@ -358,7 +355,7 @@ class PlatoonVehicle:
             
             # Control the robot steering based on the calculated wheel speeds
             gpg.steer(rightSpeed, leftSpeed)
-
+        
         @staticmethod
         def follow_lane(frame, gpg):
             
@@ -450,3 +447,55 @@ class PlatoonVehicle:
                 print('Steering Angle: ')
                 steering_angle = calculate_steering_angle(x_offset)
                 print(str(steering_angle))
+
+
+            @staticmethod
+            def follow_qr(data, x_offset, y_offset):
+                data, x_offset, y_offset = locateQR(frame)
+                printQRData(data, x_offset, y_offset)
+                steering_angle = calculate_steering_angle(x_offset)
+                steer_robot(steering_angle, gpg)
+
+
+            @staticmethod 
+            def main_script():
+                
+                # Create an instance of PlatoonVehicle class
+                vehicle = PlatoonVehicle(speed=100, distance=10)
+                myDistanceSensor = vehicle.distance_sensor
+                video = vehicle.video
+                gpg = vehicle.gpg
+                # Loop through video frames
+                
+                while True:
+                    try:
+                        # Read a video frame from the camera
+                        ret,frame = video.read()
+
+                        try:
+                            follow_qr()
+                
+                        except:
+                            print('No QR Found')
+                            
+                        follow_lane(frame, gpg)
+                        control_speed(myDistanceSensor, gpg)
+
+                        key = waitKey(1)
+                        if key == 27:
+                            break
+
+                    except:
+                        gpg.set_speed(0)
+                    
+                # Stop the robot when the loop is ended
+                gpg.set_speed(0)
+
+                # Release the video capture and close all windows
+                video.release()
+                destroyAllWindows()
+
+            main_script()
+
+
+
