@@ -39,6 +39,7 @@ class PlatoonVehicle:
     def locateQR(frame):
         decoded_objs = decode(frame)
         if decoded_objs == None:
+            print('decoded_objs == None')
             raise Exception
         for obj in decoded_objs:
             # Get the barcode's data and type
