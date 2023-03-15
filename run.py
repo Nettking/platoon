@@ -21,13 +21,14 @@ The script requires the installation of the OpenCV and EasyGoPiGo3 libraries.
 """
 
 # Beans
-import cv2
-from init import *
-from platooning import *
+from Platoon import *
+from PlatoonVehicle import *
+from cv2 import waitKey, destroyAllWindows
 
-from lane_keeping import *
+# Create an instance of PlatoonVehicle class
+vehicle = PlatoonVehicle(speed=100, distance=10)
 
-video, gpg, myDistanceSensor = init()
+video, gpg, myDistanceSensor = vehicle.init()
 
 
 # Loop through video frames
@@ -37,18 +38,18 @@ while True:
         ret,frame = video.read()
 
         try:
-            data, x_offset, y_offset = locateQR(frame)
-            printQRData(data, x_offset, y_offset)
-            steering_angle = calculate_steering_angle(x_offset)
-            steer_robot(steering_angle, gpg)
+            data, x_offset, y_offset = vehicle.locateQR(frame)
+            vehicle.printQRData(data, x_offset, y_offset)
+            steering_angle = vehicle.calculate_steering_angle(x_offset)
+            vehicle.steer_robot(steering_angle, gpg)
  
         except:
             print('No QR Found')
-            follow_lane(frame, gpg)
+            vehicle.follow_lane(frame, gpg)
         
-        control_speed(myDistanceSensor, gpg)
+        vehicle.control_speed(myDistanceSensor, gpg)
 
-        key = cv2.waitKey(1)
+        key = waitKey(1)
         if key == 27:
             break
 
@@ -60,4 +61,4 @@ gpg.set_speed(0)
 
 # Release the video capture and close all windows
 video.release()
-cv2.destroyAllWindows()
+destroyAllWindows()

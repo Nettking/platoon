@@ -1,27 +1,4 @@
-<<<<<<< Updated upstream:platooning/Platoon.py
-class PlatoonVehicle:
-    def __init__(self, speed, distance):
-        
-        # Speed of the vehicle
-        self.speed = speed
-
-        # Distance of the vehicle from the vehicle in front of it
-        self.distance = distance
-
-    def set_speed(self, speed):
-        # Set the speed of the vehicle
-        self.speed = speed
-
-    def set_distance(self, distance):
-        # Set the distance of the vehicle
-        self.distance = distance
-
-
-
-=======
-from platooning import *
 import PlatoonVehicle
->>>>>>> Stashed changes:Platoon.py
 
 class Platoon:
     def __init__(self, num_vehicles):

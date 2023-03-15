@@ -1,10 +1,8 @@
-from platooning import *
-
-
 import math
 import numpy as np
 from easygopigo3 import EasyGoPiGo3
-from cv2 import cvtColor, GaussianBlur, Canny, HoughLinesP, line, addWeighted
+from cv2 import cvtColor, GaussianBlur, Canny, HoughLinesP, line, addWeighted, resize, imshow, fillPoly, bitwise_and, VideoCapture, rectangle, CAP_PROP_FRAME_WIDTH, CAP_PROP_FRAME_HEIGHT, COLOR_BGR2GRAY
+from pyzbar.pyzbar import decode
 
 
 class PlatoonVehicle:
@@ -25,6 +23,56 @@ class PlatoonVehicle:
         self.MQTT_BROKER_PORT = MQTT_BROKER_PORT
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
+
+        @staticmethod
+        def initialize_distance_sensor(self):
+            '''
+            Create an instance of the Distance Sensor class.
+            I2C1 and I2C2 are just labels used for identifyng the port on the GoPiGo3 board.
+            But technically, I2C1 and I2C2 are the same thing, so we don't have to pass any port to the constructor.
+            '''
+            my_distance_sensor = self.gpg.init_distance_sensor()
+            return my_distance_sensor
+
+        @staticmethod
+        def init(self):
+            # Initialize GoPiGo3 robot and set speed
+            gpg = self.gpg
+            gpg.set_speed(0)
+
+            # Initialize distance sensor
+            myDistanceSensor = initialize_distance_sensor(gpg)
+
+            # Initialize video capture and set resolution
+            video = VideoCapture(0)
+            video.set(CAP_PROP_FRAME_WIDTH,320)
+            video.set(CAP_PROP_FRAME_HEIGHT,240)
+            return video, gpg, myDistanceSensor
+
+        @staticmethod
+        def locateQR(frame):
+            decoded_objs = decode(frame)
+            if decoded_objs == None:
+                raise Exception
+            for obj in decoded_objs:
+                # Get the barcode's data and type
+                data = obj.data.decode("utf-8")
+                barcode_type = obj.type
+
+                # Get the barcode's bounding box and calculate the center
+                left, top, width, height = obj.rect
+                center_x = left + (width / 2)
+                center_y = top + (height / 2)
+
+                # Calculate the horizontal and vertical offsets from the center of the frame
+                x_offset = center_x - (frame.shape[1] / 2)
+                y_offset = center_y - (frame.shape[0] / 2)
+
+                # Draw a red rectangle around the barcode
+                rectangle(frame, (left, top), (left+width, top+height), (0, 0, 255), 2)
+
+                return data, x_offset, y_offset
+
 
 
         @staticmethod
@@ -73,13 +121,13 @@ class PlatoonVehicle:
         def detect_edges(frame):
 
             # Convert the color image to grayscale
-            img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            img = cvtColor(frame, COLOR_BGR2GRAY)
 
             # Apply Gaussian blur to the grayscale image
-            blur = cv2.GaussianBlur(img, (5,5), 0)
+            blur = GaussianBlur(img, (5,5), 0)
 
             # Apply Canny edge detection to the blurred image
-            edges = cv2.Canny(blur, 100, 200)
+            edges = Canny(blur, 100, 200)
 
             return edges
         
@@ -101,10 +149,10 @@ class PlatoonVehicle:
             ]], np.int32)
             
             # Fill the polygon with white color
-            cv2.fillPoly(mask, polygon, 255)
+            fillPoly(mask, polygon, 255)
             
             # Apply the mask to the input image using bitwise AND operation
-            cropped_edges = cv2.bitwise_and(edges, mask)
+            cropped_edges = bitwise_and(edges, mask)
             
             return cropped_edges
 
@@ -121,7 +169,7 @@ class PlatoonVehicle:
             min_threshold = 10  
             
             # Apply the probabilistic Hough transform to the input image to detect line segments
-            line_segments = cv2.HoughLinesP(cropped_edges, rho, theta, min_threshold, 
+            line_segments = HoughLinesP(cropped_edges, rho, theta, min_threshold, 
                                             np.array([]), minLineLength=40, maxLineGap=80)
             
             return line_segments
@@ -182,12 +230,12 @@ class PlatoonVehicle:
             # If there are no left line fits, return an empty list of lane lines
             if len(left_fit) > 0:
                 # Calculate the endpoints of the left lane line
-                lane_lines.append(m_p.make_points(frame, left_fit_average))
+                lane_lines.append(make_points(frame, left_fit_average))
 
             # Repeat for the right lane line
             right_fit_average = np.average(right_fit, axis=0)
             if len(right_fit) > 0:
-                lane_lines.append(m_p.make_points(frame, right_fit_average))
+                lane_lines.append(make_points(frame, right_fit_average))
 
             return lane_lines
         
@@ -205,10 +253,10 @@ class PlatoonVehicle:
                 for line in lines:
                     for x1, y1, x2, y2 in line:
                         # Draw the line on the line image using OpenCV.
-                        cv2.line(line_image, (x1, y1), (x2, y2), line_color, line_width)
+                        line(line_image, (x1, y1), (x2, y2), line_color, line_width)
 
             # Combine the line image with the original frame using the OpenCV addWeighted() function.
-            line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
+            line_image = addWeighted(frame, 0.8, line_image, 1, 1)
 
             return line_image
         
@@ -228,10 +276,10 @@ class PlatoonVehicle:
             y2 = int(height / 2)  # The ending y-coordinate is the middle of the frame.
 
             # Draw the heading line on the black image using OpenCV.
-            cv2.line(heading_image, (x1, y1), (x2, y2), line_color, line_width)
+            line(heading_image, (x1, y1), (x2, y2), line_color, line_width)
 
             # Add the heading line image to the input frame using alpha blending.
-            heading_image = cv2.addWeighted(frame, 0.8, heading_image, 1, 1)
+            heading_image = addWeighted(frame, 0.8, heading_image, 1, 1)
 
             # Return the output video frame with the heading line displayed.
             return heading_image
@@ -314,14 +362,22 @@ class PlatoonVehicle:
             
             return smooth_angle
 
-
+        @staticmethod
+        def steer_robot(steering_angle, gpg):
+            # Validate the steering angle by comparing it to the last value
+            validated_steering_angle = compare_to_last_angle(steering_angle)
+            
+            # Calculate the wheel speeds based on the validated steering angle
+            leftSpeed, rightSpeed = calculate_wheel_speeds(validated_steering_angle)
+            
+            # Control the robot steering based on the calculated wheel speeds
+            gpg.steer(rightSpeed, leftSpeed)
 
         @staticmethod
-        # Initialize GoPiGo3 robot and set speed
         def follow_lane(frame, gpg):
             
             # Resize to 1/2 to use for lane keeping
-            resized_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
+            resized_frame = resize(frame, (0, 0), fx=0.5, fy=0.5)
 
             # Detect edges in the video frame
             edges = detect_edges(resized_frame)
@@ -353,10 +409,58 @@ class PlatoonVehicle:
             heading_image = display_heading_line(lane_lines_image, steering_angle)
 
             # Display final video with heading line in new window
-            cv2.imshow("Heading line", heading_image)
+            imshow("Heading line", heading_image)
             
             # Output the validated steering angle and wheel speeds to the console
             print('Steering angle:' + str(validated_steering_angle))
             print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
         
-                    
+            @staticmethod
+            def get_distance(my_distance_sensor):
+                try:
+                    distance_in_mm = str(my_distance_sensor.read_mm())
+                    return distance_in_mm
+                except:
+                    print("Distance sensor reading error")
+                    return None
+            
+            @staticmethod
+            def control_speed(myDistanceSensor, gpg):
+                # Get distance and adjust speed if too close
+                distance = get_distance(myDistanceSensor)
+                if distance is not None:
+                    print('Distance: ' + distance)
+                    if int(distance) < 100:
+                        gpg.set_speed(0)
+                    elif int(distance) < 200:
+                        gpg.set_speed(50)
+                    else:
+                        gpg.set_speed(100)
+                else:
+                    gpg.set_speed(0)
+
+
+            @staticmethod
+            def calculate_steering_angle(x_offset, wheelbase=0.117):
+                k = 10
+                steering_angle = x_offset * k
+
+                # Limit the steering angle to a maximum of 180 degrees
+                steering_angle = min(max(steering_angle, -90), 90)
+
+                # Add 90 degrees to convert it to the 0-180 degrees range
+                steering_angle += 90
+
+                return steering_angle
+            
+            @staticmethod
+            def printQRData(data, x_offset, y_offset):
+                print('Data: ')
+                print(str(data))
+                print('X_offset: ')
+                print(str(x_offset))
+                print('Y_offset: ')
+                print(str(y_offset))
+                print('Steering Angle: ')
+                steering_angle = calculate_steering_angle(x_offset)
+                print(str(steering_angle))
