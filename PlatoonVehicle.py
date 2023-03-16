@@ -46,21 +46,21 @@ class PlatoonVehicle:
         for obj in decoded_objs:
             # Get the barcode's data and type
             data = obj.data.decode("utf-8")
-            print('set utf8')
+            
             barcode_type = obj.type
             
             # Get the barcode's bounding box and calculate the center
             left, top, width, height = obj.rect
             center_x = left + (width / 2)
             center_y = top + (height / 2)
-            print('qr math complete')
+            
             # Calculate the horizontal and vertical offsets from the center of the frame
             x_offset = center_x - (frame.shape[1] / 2)
             y_offset = center_y - (frame.shape[0] / 2)
-            print('offset calculated')
+            
             # Draw a red rectangle around the barcode
             rectangle(frame, (left, top), (left+width, top+height), (0, 0, 255), 2)
-            print('drawn rectangle')
+            
             imshow('QR Detection', frame)
             print('imshow')
             return data, x_offset, y_offset
@@ -352,7 +352,6 @@ class PlatoonVehicle:
         
         return smooth_angle
 
-    @staticmethod
     def steer_robot(self, steering_angle, gpg):
         # Validate the steering angle by comparing it to the last value
         validated_steering_angle = self.compare_to_last_angle(steering_angle)
@@ -446,8 +445,8 @@ class PlatoonVehicle:
 
         return steering_angle
     
-    @staticmethod
     def printQRData(self, data, x_offset, y_offset):
+        
         print('Data: ')
         print(str(data))
         print('X_offset: ')
