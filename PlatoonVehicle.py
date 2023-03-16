@@ -33,7 +33,7 @@ class PlatoonVehicle:
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
         
-    
+    @staticmethod
     def locateQR(frame):
         print('Entered locate qr')
         decoded_objs = decode(frame)
