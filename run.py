@@ -22,7 +22,7 @@ while True:
         except:
             print('No QR Found')
             
-        vehicle.follow_lane(frame, gpg)
+        #vehicle.follow_lane(frame, gpg)
         vehicle.control_speed(distance_sensor, gpg)
 
         key = waitKey(1)
