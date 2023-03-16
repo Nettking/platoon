@@ -407,6 +407,7 @@ class PlatoonVehicle:
 
     @staticmethod
     def get_distance(my_distance_sensor):
+        print('Entered get distance')
         try:
             distance_in_mm = str(my_distance_sensor.read_mm())
             return distance_in_mm
