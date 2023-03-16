@@ -37,9 +37,9 @@ class PlatoonVehicle:
 
     @staticmethod
     def locateQR(frame):
-        print('Entered locate qr')
+       
         decoded_objs = decode_qr(frame)
-
+        imshow('QR Detection', frame)
         if decoded_objs == None:
             print('decoded_objs == None')
             raise Exception
@@ -61,7 +61,7 @@ class PlatoonVehicle:
             # Draw a red rectangle around the barcode
             rectangle(frame, (left, top), (left+width, top+height), (0, 0, 255), 2)
             
-            imshow('QR Detection', frame)
+            
             print('imshow')
             return data, x_offset, y_offset
 
