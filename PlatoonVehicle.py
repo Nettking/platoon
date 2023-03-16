@@ -55,7 +55,7 @@ class PlatoonVehicle:
 
             # Draw a red rectangle around the barcode
             rectangle(frame, (left, top), (left+width, top+height), (0, 0, 255), 2)
-
+            imshow('QR Detection', frame)
             return data, x_offset, y_offset
 
     @staticmethod
