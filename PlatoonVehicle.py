@@ -32,8 +32,6 @@ class PlatoonVehicle:
         self.MQTT_BROKER_PORT = MQTT_BROKER_PORT
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
-
-    
         
     
     def locateQR(frame):
@@ -60,8 +58,6 @@ class PlatoonVehicle:
 
             return data, x_offset, y_offset
 
-
-
     @staticmethod
     def make_points(frame, line):
         # Get the height and width of the input frame
@@ -86,7 +82,6 @@ class PlatoonVehicle:
         # Return the endpoints of the line as a list of two points
         return [[x1, y1, x2, y2]]
 
-    
     def compare_to_last_angle(self, angle):
         # Calculate the difference between the input value and the last stored value
         diff = abs(self.last_angle - angle)
@@ -103,6 +98,7 @@ class PlatoonVehicle:
             self.last_angle = angle
             # Return the last stored value
             return self.last_angle
+        
     @staticmethod
     def detect_edges(frame):
 
