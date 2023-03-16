@@ -2,7 +2,7 @@ import math
 import numpy as np
 from easygopigo3 import EasyGoPiGo3
 from cv2 import cvtColor, GaussianBlur, Canny, HoughLinesP, line, addWeighted, resize, imshow, fillPoly, bitwise_and, VideoCapture, rectangle, CAP_PROP_FRAME_WIDTH, CAP_PROP_FRAME_HEIGHT, COLOR_BGR2GRAY, waitKey, destroyAllWindows
-from pyzbar.pyzbar import decode
+from pyzbar.pyzbar import decode as decode_qr
 
 
 class PlatoonVehicle:
@@ -36,7 +36,7 @@ class PlatoonVehicle:
     @staticmethod
     def locateQR(frame):
         print('Entered locate qr')
-        decoded_objs = decode(frame)
+        decoded_objs = decode_qr(frame)
 
         if decoded_objs == None:
             print('decoded_objs == None')
