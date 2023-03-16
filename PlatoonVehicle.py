@@ -28,7 +28,7 @@ class PlatoonVehicle:
         self.video.set(CAP_PROP_FRAME_HEIGHT,240)
 
         self.distance_sensor = self.gpg.init_distance_sensor()
-
+        self.distance = 10
         self.MQTT_BROKER_PORT = MQTT_BROKER_PORT
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
@@ -405,11 +405,11 @@ class PlatoonVehicle:
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
 
-    @staticmethod
-    def get_distance(my_distance_sensor):
+    
+    def get_distance(self):
         print('Entered get distance')
         try:
-            distance_in_mm = str(my_distance_sensor.read_mm())
+            distance_in_mm = str(self.distance_sensor.read_mm())
             return distance_in_mm
         except:
             print("Distance sensor reading error")
@@ -419,7 +419,7 @@ class PlatoonVehicle:
     def control_speed(self, myDistanceSensor, gpg):
         print('entered control speed')
         # Get distance and adjust speed if too close
-        distance = self.get_distance(myDistanceSensor)
+        distance = self.get_distance()
         print('Collected distance')
         if distance is not None:
             print('Distance: ' + distance)
