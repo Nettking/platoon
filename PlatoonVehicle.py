@@ -33,6 +33,8 @@ class PlatoonVehicle:
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
         
+
+
     @staticmethod
     def locateQR(frame):
         print('Entered locate qr')
@@ -350,7 +352,7 @@ class PlatoonVehicle:
         
         return smooth_angle
 
-    
+    @staticmethod
     def steer_robot(self, steering_angle, gpg):
         # Validate the steering angle by comparing it to the last value
         validated_steering_angle = self.compare_to_last_angle(steering_angle)
@@ -431,7 +433,7 @@ class PlatoonVehicle:
             gpg.set_speed(0)
 
 
-    
+    @staticmethod
     def calculate_steering_angle(x_offset, wheelbase=0.117):
         k = 10
         steering_angle = x_offset * k
@@ -443,7 +445,8 @@ class PlatoonVehicle:
         steering_angle += 90
 
         return steering_angle
-
+    
+    @staticmethod
     def printQRData(self, data, x_offset, y_offset):
         print('Data: ')
         print(str(data))
