@@ -416,7 +416,7 @@ class PlatoonVehicle:
             return None
 
 
-    def control_speed(self, myDistanceSensor, gpg):
+    def control_speed(self, gpg):
         print('entered control speed')
         # Get distance and adjust speed if too close
         distance = self.get_distance()

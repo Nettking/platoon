@@ -23,7 +23,7 @@ while True:
         
             
         #vehicle.follow_lane(frame, gpg)
-        vehicle.control_speed(distance_sensor, gpg)
+        vehicle.control_speed(gpg)
 
         key = waitKey(1)
         if key == 27:
