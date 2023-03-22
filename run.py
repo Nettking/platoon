@@ -31,16 +31,14 @@ while True:
 
         try:
             data, x_offset, y_offset = vehicle.locateQR(frame)
-            #vehicle.printQRData(data, x_offset, y_offset)
-            #steering_angle = vehicle.calculate_steering_angle(x_offset)
-            #vehicle.steer_robot(steering_angle, gpg)
+            vehicle.printQRData(data, x_offset, y_offset)
+            steering_angle = vehicle.calculate_steering_angle(x_offset)
+            vehicle.steer_robot(steering_angle, gpg)
         except:
             print('No QR Found')
-        
-        
             
         #vehicle.follow_lane(frame, gpg)
-        #vehicle.control_speed(gpg)
+        vehicle.control_speed(gpg)
 
         key = waitKey(1)
         if key == 27:
