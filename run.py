@@ -3,7 +3,26 @@ import time
 
 # Create an instance of PlatoonVehicle class
 vehicle = PlatoonVehicle()
-video, gpg, distance_sensor = vehicle.init()
+
+# Initialize GoPiGo3 robot and set speed
+gpg = vehicle.gpg
+vehicle.gpg.set_speed(0)
+try:
+    # Initialize distance sensor
+    distance_sensor = vehicle.distance_sensor
+except:
+    print('Failed to initialize distance sensor')
+# Initialize video capture and set resolution
+try:
+    video = vehicle.video
+except:
+    print('Failed to set video')
+
+video.set(CAP_PROP_FRAME_WIDTH,640)
+video.set(CAP_PROP_FRAME_HEIGHT,480)
+
+            
+
 time.sleep(1)
 while True:
     try:
