@@ -403,7 +403,7 @@ class PlatoonVehicle:
         print('Heading image')
         # Display final video with heading line in new window
         imshow("Heading line", heading_image)
-        print('imshow')
+
         # Output the validated steering angle and wheel speeds to the console
         print('Steering angle:' + str(validated_steering_angle))
         print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
