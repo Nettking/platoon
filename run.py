@@ -1,9 +1,10 @@
 from PlatoonVehicle import *
+import time
 
 # Create an instance of PlatoonVehicle class
 vehicle = PlatoonVehicle()
 video, gpg, distance_sensor = vehicle.init()
-
+time.sleep(1)
 while True:
     try:
         # Read a video frame from the camera
