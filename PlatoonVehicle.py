@@ -65,7 +65,7 @@ class PlatoonVehicle:
             rectangle(frame, (left, top), (left+width, top+height), (0, 0, 255), 2)
             imshow('QR Detection', frame)
             
-            print('imshow')
+            
             return data, x_offset, y_offset
 
     @staticmethod
@@ -168,7 +168,7 @@ class PlatoonVehicle:
 
     #@staticmethod            
     def average_slope_intercept(self, frame, line_segments):
-        print('entered avg')
+        
         # Initialize the list of lane lines
         lane_lines = []
         
@@ -371,37 +371,37 @@ class PlatoonVehicle:
         
         # Resize to 1/2 to use for lane keeping
         #resized_frame = frame#resize(frame, (0, 0), fx=0.5, fy=0.5)
-        print('Resize to 1/2 to use for lane keeping')
+        
         # Detect edges in the video frame
         edges = self.detect_edges(frame)
-        print('Detected edges')
+        
         # Select region of interest in the video frame
         roi = self.region_of_interest(edges)
-        print('Selected roi')
+        
         # Detect line segments in the selected region of interest
         line_segments = self.detect_line_segments(roi)
-        print('Set linesegments')
+        
         # Fit line segments to obtain the lane lines
         lane_lines = self.average_slope_intercept(frame,line_segments)
-        print('Lane lines')
+        
         # Display the lane lines on the video frame
         lane_lines_image = self.display_lines(frame,lane_lines)
-        print('lane lines image')
+        
         
         # Calculate the steering angle based on the lane lines
         steering_angle = self.get_steering_angle(frame, lane_lines)
-        print('Steering angle')
+        
         # Validate the steering angle by comparing it to the last value
         validated_steering_angle = self.compare_to_last_angle(steering_angle)
-        print('Validated angle')
+        
         # Calculate the wheel speeds based on the validated steering angle
         leftSpeed, rightSpeed = self.calculate_wheel_speeds(validated_steering_angle)
-        print('Left right speed')
+        
         self.steer_robot(validated_steering_angle, gpg)
-        print('Steer robot')
+        
         # Display the heading line on the video frame
         heading_image = self.display_heading_line(lane_lines_image, steering_angle)
-        print('Heading image')
+        
         # Display final video with heading line in new window
         imshow("Heading line", heading_image)
 
