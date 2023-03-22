@@ -40,8 +40,8 @@ while True:
         vehicle.follow_lane(frame, gpg)
 
 
-    except:
-        print('Unable to follow lane')
+    except Exception as e:
+        print("An error occurred: {}".format(e))
         vehicle.gpg.set_speed(0)
     try:    
         vehicle.control_speed(gpg)
