@@ -37,7 +37,7 @@ while True:
         except:
             print('No QR Found')
                  
-        #vehicle.follow_lane(frame, gpg)
+        vehicle.follow_lane(frame, gpg)
 
 
     except Exception as e:
