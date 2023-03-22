@@ -3,7 +3,7 @@ import numpy as np
 from easygopigo3 import EasyGoPiGo3
 from cv2 import cvtColor, GaussianBlur, Canny, HoughLinesP, line, addWeighted, resize, imshow, fillPoly, bitwise_and, VideoCapture, rectangle, CAP_PROP_FRAME_WIDTH, CAP_PROP_FRAME_HEIGHT, COLOR_BGR2GRAY, waitKey, destroyAllWindows
 from pyzbar.pyzbar import decode as decode_qr
-
+import requests
 
 class PlatoonVehicle:
     def __init__(self, speed=0, distance=100, MQTT_TOPIC_SUB = "test/in", MQTT_TOPIC_PUB = "test/out", MQTT_BROKER_PORT = 1883):
@@ -15,7 +15,9 @@ class PlatoonVehicle:
         self.distance = distance
 
         # Unique IP address of the vehicle
-        self.unique_ip = ""
+        response = requests.get('https://api.ipify.org')
+        public_ip_address = response.text
+        self.unique_ip = str(public_ip_address)
          
         self.gpg = EasyGoPiGo3()
         gpg = self.gpg
