@@ -48,12 +48,10 @@ class PlatoonVehicle:
             video = VideoCapture(0)
         except:
             print('Failed to set video')
-            
+
         video.set(CAP_PROP_FRAME_WIDTH,640)
         video.set(CAP_PROP_FRAME_HEIGHT,480)
-        if video.isOpened() == False:
-            print("Error opening video stream or file")
-            raise Exception("Error opening video stream or file")
+
             
         return video, gpg, distance_sensor
     
