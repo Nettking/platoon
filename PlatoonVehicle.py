@@ -469,8 +469,21 @@ class PlatoonVehicle:
         steering_angle = self.calculate_steering_angle(x_offset)
         print(str(steering_angle))
 
+    def kill(gpg, video):
+        # Stop the robot when the loop is ended
+        gpg.set_speed(0)
 
+        # Release the video capture and close all windows
+        video.release()
+        destroyAllWindows()
 
+    def follow_qr(self, frame, gpg):
+        data, x_offset, y_offset = self.locateQR(frame)
+        self.printQRData(data, x_offset, y_offset)
+        steering_angle = self.calculate_steering_angle(x_offset)
+        self.steer_robot(steering_angle, gpg)
+
+    
 
 
 
