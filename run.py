@@ -47,13 +47,13 @@ while True:
 
         key = waitKey(1)
         if key == 27:
-            vehicle.gpg.set_speed(0)
+            gpg.set_speed(0)
             time.sleep(0.2)
             break
     except:
         print('unable to control speed.')
 # Stop the robot when the loop is ended
-vehicle.gpg.set_speed(0)
+gpg.set_speed(0)
 
 # Release the video capture and close all windows
 video.release()
