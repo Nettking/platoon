@@ -34,26 +34,7 @@ class PlatoonVehicle:
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
     
     
-    def init(self):
-        # Initialize GoPiGo3 robot and set speed
-        gpg = EasyGoPiGo3()
-        gpg.set_speed(0)
-        try:
-            # Initialize distance sensor
-            distance_sensor = gpg.init_distance_sensor()
-        except:
-            print('Failed to initialize distance sensor')
-        # Initialize video capture and set resolution
-        try:
-            video = VideoCapture(0)
-        except:
-            print('Failed to set video')
 
-        video.set(CAP_PROP_FRAME_WIDTH,640)
-        video.set(CAP_PROP_FRAME_HEIGHT,480)
-
-            
-        return video, gpg, distance_sensor
     
 
 
@@ -82,7 +63,7 @@ class PlatoonVehicle:
             
             # Draw a red rectangle around the barcode
             rectangle(frame, (left, top), (left+width, top+height), (0, 0, 255), 2)
-            
+            imshow('QR Detection', frame)
             
             print('imshow')
             return data, x_offset, y_offset
