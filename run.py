@@ -6,7 +6,7 @@ vehicle = PlatoonVehicle()
 
 # Initialize GoPiGo3 robot and set speed
 gpg = vehicle.gpg
-vehicle.gpg.set_speed(0)
+gpg.set_speed(0)
 try:
     # Initialize distance sensor
     distance_sensor = vehicle.distance_sensor
@@ -39,14 +39,11 @@ while True:
                  
         vehicle.follow_lane(frame, gpg)
 
-
     except Exception as e:
         print("An error occurred: {}".format(e))
-        
-
-        vehicle.gpg.set_speed(0)
+        gpg.set_speed(0)
     try:    
-        vehicle.control_speed(gpg)
+        vehicle.control_speed(gpg, distance_sensor)
 
         key = waitKey(1)
         if key == 27:

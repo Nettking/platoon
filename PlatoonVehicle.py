@@ -33,11 +33,6 @@ class PlatoonVehicle:
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
     
-    
-
-    
-
-
     @staticmethod
     def locateQR(frame):
        
@@ -419,20 +414,20 @@ class PlatoonVehicle:
         #print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
 
     
-    def get_distance(self):
+    def get_distance(distance_sensor):
         
         try:
-            distance_in_mm = str(self.distance_sensor.read_mm())
+            distance_in_mm = str(distance_sensor.read_mm())
             return distance_in_mm
         except:
             print("Distance sensor reading error")
             return None
 
 
-    def control_speed(self, gpg):
+    def control_speed(self, gpg, distance_sensor):
         
         # Get distance and adjust speed if too close
-        distance = 1000#self.get_distance()
+        distance = self.get_distance(distance_sensor)
         gpg.set_speed(100)
         if distance is not None:
             #print('Distance: ' + distance)
