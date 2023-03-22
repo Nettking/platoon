@@ -38,16 +38,19 @@ while True:
             print('No QR Found')
         '''         
         vehicle.follow_lane(frame, gpg)
+
+
+    except:
+        print('Unable to follow lane')
+        vehicle.gpg.set_speed(0)
+    try:    
         vehicle.control_speed(gpg)
 
         key = waitKey(1)
         if key == 27:
             break
-
     except:
-        print('Unable to follow lane')
-        vehicle.gpg.set_speed(0)
-    
+        print('unable to control speed.')
 # Stop the robot when the loop is ended
 vehicle.gpg.set_speed(0)
 
