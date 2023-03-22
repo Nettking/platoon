@@ -411,7 +411,7 @@ class PlatoonVehicle:
 
     
     def get_distance(self):
-        print('Entered get distance')
+        
         try:
             distance_in_mm = str(self.distance_sensor.read_mm())
             return distance_in_mm
@@ -421,10 +421,10 @@ class PlatoonVehicle:
 
 
     def control_speed(self, gpg):
-        print('entered control speed')
+        
         # Get distance and adjust speed if too close
         distance = self.get_distance()
-        print('Collected distance')
+        
         if distance is not None:
             print('Distance: ' + distance)
             if int(distance) < 100:
