@@ -46,7 +46,7 @@ while True:
 
         vehicle.gpg.set_speed(0)
     try:    
-        vehicle.control_speed(gpg)
+        #vehicle.control_speed(gpg)
 
         key = waitKey(1)
         if key == 27:
