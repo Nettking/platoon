@@ -28,7 +28,7 @@ while True:
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
-        '''
+        
         try:
             data, x_offset, y_offset = vehicle.locateQR(frame)
             vehicle.printQRData(data, x_offset, y_offset)
@@ -36,12 +36,13 @@ while True:
             vehicle.steer_robot(steering_angle, gpg)
         except:
             print('No QR Found')
-        '''         
+                 
         vehicle.follow_lane(frame, gpg)
 
 
     except Exception as e:
         print("An error occurred: {}".format(e))
+        
 
         vehicle.gpg.set_speed(0)
     try:    
