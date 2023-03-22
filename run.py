@@ -2,7 +2,7 @@ from PlatoonVehicle import *
 
 # Create an instance of PlatoonVehicle class
 vehicle = PlatoonVehicle()
-video, gpg, myDistanceSensor = vehicle.init()
+video, gpg, distance_sensor = vehicle.init()
 
 while True:
     try:
