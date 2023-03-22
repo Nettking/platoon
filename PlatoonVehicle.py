@@ -18,17 +18,18 @@ class PlatoonVehicle:
         self.unique_ip = ""
          
         self.gpg = EasyGoPiGo3()
+        gpg = self.gpg
+
+        self.distance_sensor = gpg.init_distance_sensor()
+        self.distance = 10
         self.last_angle = 90
-        
-        self.gpg.set_speed(0)
+        gpg.set_speed(0)
 
         # Initialize video capture and set resolution
         self.video = VideoCapture(0)
         self.video.set(CAP_PROP_FRAME_WIDTH,320)
         self.video.set(CAP_PROP_FRAME_HEIGHT,240)
 
-        self.distance_sensor = self.gpg.init_distance_sensor()
-        self.distance = 10
         self.MQTT_BROKER_PORT = MQTT_BROKER_PORT
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
@@ -388,7 +389,7 @@ class PlatoonVehicle:
         lane_lines = self.average_slope_intercept(frame,line_segments)
         
         # Display the lane lines on the video frame
-        lane_lines_image = self.display_lines(frame,lane_lines)
+        #lane_lines_image = self.display_lines(frame,lane_lines)
         
         
         # Calculate the steering angle based on the lane lines
@@ -398,13 +399,13 @@ class PlatoonVehicle:
         validated_steering_angle = self.compare_to_last_angle(steering_angle)
         
         # Calculate the wheel speeds based on the validated steering angle
-        leftSpeed, rightSpeed = self.calculate_wheel_speeds(validated_steering_angle)
-        if leftSpeed == None:
-            print('No wheelspeed found')
+        #leftSpeed, rightSpeed = self.calculate_wheel_speeds(validated_steering_angle)
+        #if leftSpeed == None:
+            #print('No wheelspeed found')
         self.steer_robot(validated_steering_angle, gpg)
         
         # Display the heading line on the video frame
-        heading_image = self.display_heading_line(lane_lines_image, steering_angle)
+        #heading_image = self.display_heading_line(lane_lines_image, steering_angle)
         
         # Display final video with heading line in new window
         #imshow("Heading line", heading_image)
