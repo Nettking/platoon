@@ -305,14 +305,14 @@ class PlatoonVehicle:
             if steering_angle < 90:
                 # Turn right
                 if steering_angle > 70:
-                    k = 0.6
+                    k = 0.3
                     turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
                 left_speed = max_speed * (1 + turnrate)
                 right_speed = max_speed * (1 - turnrate)
             else:
                 # Turn left
                 if steering_angle < 110:
-                    k = 0.6
+                    k = 0.3
                     turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
                 
                 right_speed = max_speed * (1 + turnrate)
