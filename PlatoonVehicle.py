@@ -298,6 +298,7 @@ class PlatoonVehicle:
 
             # Calculate turn rate
             turnrate = ((turning_radius - wheelbase / 2) / turning_radius) / 2
+            print('Turnrate:' + turnrate)
 
             # Calculate wheel speeds based on turning radius
             if steering_angle < 90:
