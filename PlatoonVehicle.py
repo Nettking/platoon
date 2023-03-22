@@ -396,7 +396,8 @@ class PlatoonVehicle:
         
         # Calculate the wheel speeds based on the validated steering angle
         leftSpeed, rightSpeed = self.calculate_wheel_speeds(validated_steering_angle)
-        
+        if leftSpeed == None:
+            print('No wheelspeed found')
         self.steer_robot(validated_steering_angle, gpg)
         
         # Display the heading line on the video frame
