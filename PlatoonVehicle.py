@@ -441,7 +441,7 @@ class PlatoonVehicle:
             elif int(distance) < 200:
                 gpg.set_speed(50)
             else:
-                gpg.set_speed(200)
+                gpg.set_speed(100)
         else:
             gpg.set_speed(0)
 
