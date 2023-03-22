@@ -417,10 +417,11 @@ class PlatoonVehicle:
         #print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
 
     
-    def get_distance(distance_sensor):
+    def get_distance(self, distance_sensor):
         
         try:
             distance_in_mm = str(distance_sensor.read_mm())
+            self.distance = distance_in_mm
             return distance_in_mm
         except:
             print("Distance sensor reading error")
