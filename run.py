@@ -41,7 +41,7 @@ while True:
 
 
     except Exception as e:
-        print("An error occurred: {}".format(e))
+        print("An error occurred: {}".format(e) + 'trace:' + e.__traceback__)
         vehicle.gpg.set_speed(0)
     try:    
         vehicle.control_speed(gpg)
