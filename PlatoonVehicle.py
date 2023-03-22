@@ -299,7 +299,7 @@ class PlatoonVehicle:
             # Calculate turn rate
             k = 0.95
             turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
-            print('Turnrate:' + str(turnrate))
+            #print('Turnrate:' + str(turnrate))
 
             # Calculate wheel speeds based on turning radius
             if steering_angle < 90:
@@ -328,7 +328,7 @@ class PlatoonVehicle:
     
     def get_steering_angle(self, frame, lane_lines):
         
-        print('Last Angle: ' + str(self.last_angle))
+        #print('Last Angle: ' + str(self.last_angle))
         height, width, _ = frame.shape
         
         if len(lane_lines) == 2:
@@ -415,8 +415,8 @@ class PlatoonVehicle:
         imshow("Heading line", heading_image)
 
         # Output the validated steering angle and wheel speeds to the console
-        print('Steering angle:' + str(validated_steering_angle))
-        print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
+        #print('Steering angle:' + str(validated_steering_angle))
+        #print('Wheel speeds: ' + str(leftSpeed) + str(rightSpeed))
 
     
     def get_distance(self):
@@ -435,7 +435,7 @@ class PlatoonVehicle:
         distance = self.get_distance()
         
         if distance is not None:
-            print('Distance: ' + distance)
+            #print('Distance: ' + distance)
             if int(distance) < 100:
                 gpg.set_speed(0)
             elif int(distance) < 200:
