@@ -49,7 +49,7 @@ while True:
 
         key = waitKey(1)
         if key == 27:
-            gpg.set_speed(0)
+            vehicle.gpg.set_speed(0)
             time.sleep(0.2)
             break
     except:
