@@ -30,10 +30,7 @@ while True:
         ret,frame = video.read()
         
         try:
-            data, x_offset, y_offset = vehicle.locateQR(frame)
-            vehicle.printQRData(data, x_offset, y_offset)
-            steering_angle = vehicle.calculate_steering_angle(x_offset)
-            vehicle.steer_robot(steering_angle, gpg)
+            vehicle.follow_qr(frame, gpg)
         except:
             print('No QR Found')
                  
@@ -41,21 +38,16 @@ while True:
 
     except Exception as e:
         print("An error occurred: {}".format(e))
-        gpg.set_speed(0)
     try:    
         vehicle.control_speed(gpg, distance_sensor)
 
         key = waitKey(1)
         if key == 27:
-            gpg.set_speed(0)
-            time.sleep(0.2)
+            vehicle.kill(gpg, video)
             break
     except:
         print('unable to control speed.')
-# Stop the robot when the loop is ended
-gpg.set_speed(0)
 
-# Release the video capture and close all windows
-video.release()
-destroyAllWindows()
+vehicle.kill(gpg, video)
+
 
