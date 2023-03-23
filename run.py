@@ -24,6 +24,8 @@ video.set(CAP_PROP_FRAME_HEIGHT,480)
             
 
 time.sleep(1)
+stop_distance = input("Please enter stop_distance: ")
+slow_distance = input("Please enter slow_distance: ")
 while True:
     try:
         # Read a video frame from the camera
@@ -39,7 +41,7 @@ while True:
     except Exception as e:
         print("An error occurred: {}".format(e))
     try:    
-        vehicle.control_speed(gpg, distance_sensor, stop_distance=500, slow_distance=800)
+        vehicle.control_speed(gpg, distance_sensor, stop_distance, slow_distance=800)
 
         key = waitKey(1)
         if key == 27:
