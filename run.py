@@ -39,7 +39,7 @@ while True:
     except Exception as e:
         print("An error occurred: {}".format(e))
     try:    
-        vehicle.control_speed(gpg, distance_sensor)
+        vehicle.control_speed(gpg, distance_sensor, stop_distance=500, slow_distance=800)
 
         key = waitKey(1)
         if key == 27:
