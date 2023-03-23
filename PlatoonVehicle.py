@@ -428,16 +428,16 @@ class PlatoonVehicle:
             return None
 
 
-    def control_speed(self, gpg, distance_sensor):
+    def control_speed(self, gpg, distance_sensor, stop_distance=100, slow_distance=200):
         
         # Get distance and adjust speed if too close
         distance = self.get_distance(distance_sensor)
         gpg.set_speed(100)
         if distance is not None:
             #print('Distance: ' + distance)
-            if int(distance) < 100:
+            if int(distance) < stop_distance:
                 gpg.set_speed(0)
-            elif int(distance) < 200:
+            elif int(distance) < slow_distance:
                 gpg.set_speed(50)
             else:
                 gpg.set_speed(100)
