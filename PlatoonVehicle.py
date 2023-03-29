@@ -92,11 +92,12 @@ class PlatoonVehicle:
         
         for ip in unique_ip:
             full_ip = common_ip + ip
-            try:
-                self.establish_connection(full_ip, MQTT_BROKER_PORT,MQTT_TOPIC_SUB, MQTT_TOPIC_PUB, self.unique_ip)
-            except Exception as e:
-                print('Error connecting to: ' + full_ip)
-                #self.error_handling(type(e), e, e.__traceback__)
+            if self.unique_ip is not full_ip:
+                try:
+                    self.establish_connection(full_ip, MQTT_BROKER_PORT,MQTT_TOPIC_SUB, MQTT_TOPIC_PUB, self.unique_ip)
+                except Exception as e:
+                    print('Error connecting to: ' + full_ip)
+                    #self.error_handling(type(e), e, e.__traceback__)
 
     @staticmethod
     def locateQR(frame):
