@@ -20,7 +20,7 @@ class PlatoonVehicle:
         response = requests.get('https://api.ipify.org')
         public_ip_address = response.text
         self.unique_ip = str(public_ip_address)
-         
+        print(self.unique_ip)
         self.gpg = EasyGoPiGo3()
         gpg = self.gpg
 
@@ -92,7 +92,7 @@ class PlatoonVehicle:
         
         for ip in unique_ip:
             full_ip = common_ip + ip
-            if self.unique_ip is not full_ip:
+            if self.unique_ip != full_ip:
                 try:
                     self.establish_connection(full_ip, MQTT_BROKER_PORT,MQTT_TOPIC_SUB, MQTT_TOPIC_PUB, self.unique_ip)
                 except Exception as e:
