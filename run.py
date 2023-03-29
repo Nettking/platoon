@@ -57,7 +57,7 @@ while True:
         vehicle.error_handling(type(e), e, e.__traceback__)
 
     try:    
-        vehicle.control_speed(gpg, distance_sensor, stop_distance=200, slow_distance=300)
+        vehicle.control_speed(gpg, distance_sensor, stop_distance=300, slow_distance=400)
 
         key = waitKey(1)
         if key == 27:
