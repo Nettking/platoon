@@ -1,9 +1,17 @@
 from PlatoonVehicle import *
 import time
 
+
+
+
+
+
+
+
+
 # Create an instance of PlatoonVehicle class
 vehicle = PlatoonVehicle()
-
+vehicle.connect_to_all_brokers()
 # Initialize GoPiGo3 robot and set speed
 gpg = vehicle.gpg
 gpg.set_speed(0)
@@ -27,7 +35,6 @@ time.sleep(1)
 #stop_distance = int(input("Please enter stop_distance: "))
 #slow_distance = int(input("Please enter slow_distance: "))
 
-vehicle.connect_to_all_brokers()
 
 
 '''

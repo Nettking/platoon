@@ -5,7 +5,7 @@ from cv2 import cvtColor, GaussianBlur, Canny, HoughLinesP, line, addWeighted, r
 from pyzbar.pyzbar import decode as decode_qr
 import requests
 import paho.mqtt.client as mqtt
-
+import subprocess
 
 class PlatoonVehicle:
     def __init__(self, speed=0, distance=100, MQTT_TOPIC_SUB = "test/in", MQTT_TOPIC_PUB = "test/out", MQTT_BROKER_PORT = 1883):
@@ -20,7 +20,6 @@ class PlatoonVehicle:
         response = requests.get('https://api.ipify.org')
         public_ip_address = response.text
         self.unique_ip = str(public_ip_address)
-        print(self.unique_ip)
         self.gpg = EasyGoPiGo3()
         gpg = self.gpg
 
@@ -99,6 +98,31 @@ class PlatoonVehicle:
                     print('Error connecting to: ' + full_ip)
                     #self.error_handling(type(e), e, e.__traceback__)
 
+    def start_script_on_other_vehicle(remote_ip):
+        username = "pi"   # Replace with your remote machine's username
+        password = "gopigo"   # Replace with your remote machine's password
+        remote_script_path = "/home/pi/platoon/run.py"  # Replace with the path to the Python script on the remote machine
+
+        # Construct the SSH command
+        command = f"sshpass -p '{password}' ssh {username}@{remote_ip} python3 {remote_script_path}"
+
+        # Execute the command using subprocess
+        result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        # Check if the command was successful
+        if result.returncode == 0:
+            print(f"Script executed successfully on remote machine {remote_ip}")
+            print("Output:")
+            print(result.stdout.decode("utf-8"))
+        else:
+            print(f"Error executing script on remote machine {remote_ip}")
+            print("Error message:")
+            print(result.stderr.decode("utf-8"))
+
+    
+    
+    
+    
     @staticmethod
     def locateQR(frame):
        

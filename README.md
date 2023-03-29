@@ -21,6 +21,9 @@ To get started with the project, you'll need to clone the repository and install
 ```sh
 git clone https://github.com/Nettking/platoon.git
 ```
+```sh
+sudo apt-get install sshpass
+```
 
 ```sh
 cd platoon
