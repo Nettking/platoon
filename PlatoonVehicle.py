@@ -548,7 +548,11 @@ class PlatoonVehicle:
 
     @staticmethod
     def calculate_steering_angle(x_offset, wheelbase=0.117):
-        k = 0.45
+        k = 0
+        if abs(x_offset) > 10: k=0.1
+        elif abs(x_offset) > 50: k=0.25
+        elif abs(x_offset) > 100: k=0.4
+        
         steering_angle = x_offset * k
 
         # Limit the steering angle to a maximum of 180 degrees
