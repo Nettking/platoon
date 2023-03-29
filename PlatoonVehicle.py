@@ -37,7 +37,7 @@ class PlatoonVehicle:
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
     
-    def error_handling(exc_type, exc_value, exc_traceback):
+    def error_handling(self, exc_type, exc_value, exc_traceback):
         print("Traceback (most recent call last):")
         while exc_traceback:
             print("  File \"{}\", line {}, in {}".format(exc_traceback.tb_frame.f_code.co_filename,
