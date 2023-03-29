@@ -26,20 +26,30 @@ video.set(CAP_PROP_FRAME_HEIGHT,480)
 time.sleep(1)
 #stop_distance = int(input("Please enter stop_distance: "))
 #slow_distance = int(input("Please enter slow_distance: "))
+
+vehicle.connect_to_all_brokers()
+
+
+'''
 while True:
+
+    
+    
+    
     try:
         # Read a video frame from the camera
         ret,frame = video.read()
         
         try:
             vehicle.follow_qr(frame, gpg)
-        except:
-            print('No QR Found')
+        except Exception as e:
+            vehicle.error_handling(type(e), e, e.__traceback__)
                  
         vehicle.follow_lane(frame, gpg)
 
     except Exception as e:
-        print("An error occurred: {}".format(e))
+        vehicle.error_handling(type(e), e, e.__traceback__)
+
     try:    
         vehicle.control_speed(gpg, distance_sensor, stop_distance=200, slow_distance=300)
 
@@ -47,9 +57,10 @@ while True:
         if key == 27:
             vehicle.kill(gpg, video)
             break
-    except:
-        print('unable to control speed.')
+    except Exception as e:
+        vehicle.error_handling(type(e), e, e.__traceback__)
 
 vehicle.kill(gpg, video)
 
 
+'''

@@ -4,6 +4,8 @@ from easygopigo3 import EasyGoPiGo3
 from cv2 import cvtColor, GaussianBlur, Canny, HoughLinesP, line, addWeighted, resize, imshow, fillPoly, bitwise_and, VideoCapture, rectangle, CAP_PROP_FRAME_WIDTH, CAP_PROP_FRAME_HEIGHT, COLOR_BGR2GRAY, waitKey, destroyAllWindows
 from pyzbar.pyzbar import decode as decode_qr
 import requests
+import paho.mqtt.client as mqtt
+
 
 class PlatoonVehicle:
     def __init__(self, speed=0, distance=100, MQTT_TOPIC_SUB = "test/in", MQTT_TOPIC_PUB = "test/out", MQTT_BROKER_PORT = 1883):
@@ -36,6 +38,63 @@ class PlatoonVehicle:
         self.MQTT_TOPIC_SUB = MQTT_TOPIC_SUB
         self.MQTT_TOPIC_PUB = MQTT_TOPIC_PUB
     
+    def error_handling(exc_type, exc_value, exc_traceback):
+        print("Traceback (most recent call last):")
+        while exc_traceback:
+            print("  File \"{}\", line {}, in {}".format(exc_traceback.tb_frame.f_code.co_filename,
+                                                         exc_traceback.tb_lineno,
+                                                         exc_traceback.tb_frame.f_code.co_name))
+            exc_traceback = exc_traceback.tb_next
+
+    ####################################################################
+    ##### MQTT
+    ####################################################################
+    def send_message(client, MQTT_TOPIC_SUB, message = "Hello, world!"):
+        # Publish a message to the specified topic
+        client.publish(MQTT_TOPIC_SUB, message)
+        print("Published message: " + message)
+
+    # Define the callback function for receiving MQTT messages
+    def on_message(self, client, MQTT_TOPIC_PUB, message):
+        # Decode the message payload from bytes to string
+        payload = message.payload.decode()
+        response = "Received: " + payload
+        print(response)
+        # Publish a response message back to the specified topic
+        self.send_message(client, MQTT_TOPIC_PUB, message = response)
+        
+    def establish_connection(self, MQTT_BROKER_ADDR, MQTT_BROKER_PORT,MQTT_TOPIC_SUB, MQTT_TOPIC_PUB, message = "Hello, world!"):
+        # Set up the MQTT client and connect to the broker
+        client = mqtt.Client()
+        client.connect(MQTT_BROKER_ADDR, MQTT_BROKER_PORT)
+
+        # Set up the callback function for receiving messages
+        client.on_message = self.on_message(client, MQTT_TOPIC_PUB, message)
+        # Subscribe to the specified topic
+        client.subscribe(MQTT_TOPIC_SUB)
+        
+        self.send_message(client, MQTT_TOPIC_SUB, message = message)
+
+        # Start the MQTT client loop to process incoming messages
+        #client.loop_start()
+        client.loop(timeout=0.01)
+
+
+    def connect_to_all_brokers(self):
+        # Define the MQTT broker address and port
+        MQTT_BROKER_PORT = 1883
+
+        # Define the MQTT topics to subscribe and publish to
+        MQTT_TOPIC_SUB = "test/in"
+        MQTT_TOPIC_PUB = "test/out"
+        common_ip = "158.39.162."
+        unique_ip = ["127","157","181","193"]
+        
+        for ip in unique_ip:
+            full_ip = common_ip + ip
+            self.establish_connection(full_ip, MQTT_BROKER_PORT,MQTT_TOPIC_SUB, MQTT_TOPIC_PUB, self.unique_ip)
+
+
     @staticmethod
     def locateQR(frame):
        

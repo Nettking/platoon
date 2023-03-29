@@ -28,7 +28,8 @@ def establish_connection(MQTT_BROKER_ADDR, MQTT_BROKER_PORT,MQTT_TOPIC_SUB, MQTT
     send_message(client, MQTT_TOPIC_SUB, message = message)
 
     # Start the MQTT client loop to process incoming messages
-    client.loop_start()
+    #client.loop_start()
+    client.loop(timeout=0.01)
 
 
 def connect_to_all_brokers():
