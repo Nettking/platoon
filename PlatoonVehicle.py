@@ -550,8 +550,8 @@ class PlatoonVehicle:
     def calculate_steering_angle(x_offset, wheelbase=0.117):
         k = 0
         if abs(x_offset) > 10: k=0.1
-        elif abs(x_offset) > 50: k=0.25
-        elif abs(x_offset) > 100: k=0.4
+        elif abs(x_offset) > 50: k=0.4
+        elif abs(x_offset) > 100: k=0.9
         
         steering_angle = x_offset * k
 
