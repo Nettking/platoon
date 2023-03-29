@@ -104,18 +104,18 @@ class PlatoonVehicle:
         remote_script_path = "/home/pi/platoon/run.py"  # Replace with the path to the Python script on the remote machine
 
         # Construct the SSH command
-        command = f"sshpass -p '{password}' ssh {username}@{remote_ip} python3 {remote_script_path}"
+        command = "sshpass -p '{}' ssh {}@{} python3 {}".format(password, username, remote_ip, remote_script_path)
 
         # Execute the command using subprocess
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         # Check if the command was successful
         if result.returncode == 0:
-            print(f"Script executed successfully on remote machine {remote_ip}")
+            print("Script executed successfully on remote machine {}".format(remote_ip))
             print("Output:")
             print(result.stdout.decode("utf-8"))
         else:
-            print(f"Error executing script on remote machine {remote_ip}")
+            print("Error executing script on remote machine {}".format(remote_ip))
             print("Error message:")
             print(result.stderr.decode("utf-8"))
 
