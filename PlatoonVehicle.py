@@ -389,10 +389,10 @@ class PlatoonVehicle:
             # Calculate wheel speeds based on turning radius
             if steering_angle < 90:
                 # Turn right
-                if steering_angle > 70:
+                if steering_angle > 60:
                     k = 0.6
                     turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
-                elif steering_angle > 80:
+                elif steering_angle > 75:
                     k = 0.4
                     turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
                 else:
@@ -403,11 +403,11 @@ class PlatoonVehicle:
                 right_speed = max_speed * (1 - turnrate)
             else:
                 # Turn left
-                if steering_angle < 110:
+                if steering_angle < 120:
                     k = 0.6
                     turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
 
-                elif steering_angle < 100:
+                elif steering_angle < 105:
                     k = 0.4
                     turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
                 else:
