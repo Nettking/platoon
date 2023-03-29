@@ -11,7 +11,7 @@ import time
 
 # Create an instance of PlatoonVehicle class
 vehicle = PlatoonVehicle()
-vehicle.connect_to_all_brokers()
+#vehicle.connect_to_all_brokers()
 # Initialize GoPiGo3 robot and set speed
 gpg = vehicle.gpg
 gpg.set_speed(0)
@@ -37,7 +37,7 @@ time.sleep(1)
 
 
 
-'''
+
 while True:
 
     
@@ -70,4 +70,3 @@ while True:
 vehicle.kill(gpg, video)
 
 
-'''
