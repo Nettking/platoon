@@ -396,7 +396,7 @@ class PlatoonVehicle:
                     k = 0.4
                     turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
                 else:
-                    k = 0.95
+                    k = 1.1
                     turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
 
                 left_speed = max_speed * (1 + turnrate)
@@ -411,7 +411,7 @@ class PlatoonVehicle:
                     k = 0.4
                     turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
                 else:
-                    k = 0.95
+                    k = 1.1
                     turnrate = abs(k * ((turning_radius - wheelbase / 2) / turning_radius) / 2)
 
                 right_speed = max_speed * (1 + turnrate)
