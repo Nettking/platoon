@@ -50,9 +50,8 @@ while True:
         try:
             vehicle.follow_qr(frame, gpg)
         except Exception as e:
-            vehicle.error_handling(type(e), e, e.__traceback__)
-                 
-        vehicle.follow_lane(frame, gpg)
+            vehicle.error_handling(type(e), e, e.__traceback__)     
+            vehicle.follow_lane(frame, gpg)
 
     except Exception as e:
         vehicle.error_handling(type(e), e, e.__traceback__)
