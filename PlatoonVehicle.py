@@ -97,8 +97,8 @@ class PlatoonVehicle:
                 except Exception as e:
                     print('Error connecting to: ' + full_ip)
                     #self.error_handling(type(e), e, e.__traceback__)
-    @staticmethod
-    def start_script_on_other_vehicle(remote_ip):
+    
+    def start_script_on_other_vehicle(self, remote_ip):
         username = "pi"   # Replace with your remote machine's username
         password = "gopigo"   # Replace with your remote machine's password
         remote_script_path = "/home/pi/platoon/run.py"  # Replace with the path to the Python script on the remote machine
